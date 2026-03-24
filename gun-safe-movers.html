@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gun Safe Moving Services in Arizona | Curl Moving</title>
+    <meta name="description" content="Professional gun safe moving in Gilbert, Mesa, Chandler, Phoenix, Scottsdale and all of Arizona. Safes up to 2000+ lbs. Call Ryan at (602) 935-4209.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header { background: #1e3a5f; color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+        header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .logo span { color: #4a9eff; }
+        nav a { color: white; text-decoration: none; margin-left: 1.5rem; font-weight: 500; }
+        nav a:hover { color: #4a9eff; }
+        .header-cta { background: #e74c3c; padding: 0.5rem 1rem; border-radius: 5px; color: white; text-decoration: none; font-weight: bold; }
+        
+        .hero { background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; padding: 4rem 0; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero .subtitle { font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem; max-width: 700px; }
+        .hero-cta { display: inline-block; background: #e74c3c; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        
+        .content-section { padding: 4rem 0; }
+        .content-section:nth-child(even) { background: #f8f9fa; }
+        .content-section h2 { font-size: 2rem; color: #1e3a5f; margin-bottom: 1.5rem; }
+        .content-section p { margin-bottom: 1rem; color: #555; font-size: 1.1rem; }
+        
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+        
+        .feature-list { list-style: none; }
+        .feature-list li { padding: 1rem; padding-left: 3rem; position: relative; background: white; margin-bottom: 0.75rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .feature-list li::before { content: "✓"; position: absolute; left: 1rem; color: #27ae60; font-weight: bold; font-size: 1.2rem; }
+        
+        .obstacles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .obstacle-item { background: white; padding: 1.5rem; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .obstacle-item .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .obstacle-item h4 { color: #1e3a5f; }
+        
+        .pricing-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .pricing-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 2px solid #eee; text-align: center; }
+        .pricing-card.featured { border-color: #1e3a5f; transform: scale(1.02); }
+        .pricing-card h3 { color: #1e3a5f; margin-bottom: 0.5rem; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: bold; color: #27ae60; margin: 1rem 0; }
+        .pricing-card .price span { font-size: 1rem; color: #666; }
+        .pricing-card ul { list-style: none; text-align: left; margin: 1.5rem 0; }
+        .pricing-card li { padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+        .pricing-btn { display: block; background: #1e3a5f; color: white; padding: 1rem; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 1rem; }
+        .pricing-btn:hover { background: #2c5282; }
+        
+        .faq-section { padding: 4rem 0; }
+        .faq-section h2 { text-align: center; color: #1e3a5f; margin-bottom: 2rem; }
+        .faq-item { background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; }
+        .faq-question { padding: 1.5rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question:hover { background: #f8f9fa; }
+        .faq-answer { padding: 0 1.5rem 1.5rem; color: #555; display: none; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question::after { content: "−"; }
+        .faq-question::after { content: "+"; font-size: 1.5rem; color: #1e3a5f; }
+        
+        .cta-section { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 4rem 0; text-align: center; }
+        .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-btn { display: inline-block; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        .cta-btn.primary { background: white; color: #e74c3c; }
+        .cta-btn.secondary { background: transparent; color: white; border: 2px solid white; }
+        
+        footer { background: #1a1a2e; color: white; padding: 2rem 0; text-align: center; }
+        footer a { color: #4a9eff; text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Curl<span>Moving</span></a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="gun-safe-movers.html">Gun Safes</a>
+                <a href="tool-box-movers.html">Tool Boxes</a>
+                <a href="vending-machine-movers.html">Vending Machines</a>
+            </nav>
+            <a href="tel:+16029354209" class="header-cta">📞 (602) 935-4209</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>🔐 Gun Safe Moving in Arizona</h1>
+            <p class="subtitle">I understand the importance of ensuring a smooth and secure delivery for your gun safe. Being a single owner operator makes me one of the top companies in Arizona for Gun Safe Moving.</p>
+            <a href="tel:+16029354209" class="hero-cta">📱 Text or Call Ryan: (602) 935-4209</a>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="two-col">
+                <div>
+                    <h2>How I Handle Your Safe</h2>
+                    <p>Your gun safe protects what matters most. I treat every move with the care and precision your valuables deserve.</p>
+                    <ul class="feature-list">
+                        <li><strong>Safes under 900 lbs</strong> - I move by myself with professional equipment</li>
+                        <li><strong>Safes 900+ lbs</strong> - I bring a helper (or discount if you assist)</li>
+                        <li><strong>Up to 2,000+ lbs</strong> - I've got the equipment for the big ones</li>
+                        <li><strong>Floor protection</strong> - Always included, no scratches</li>
+                        <li><strong>Fully insured</strong> - Your safe is covered</li>
+                    </ul>
+                </div>
+                <div>
+                    <h2>What I Need for a Quote</h2>
+                    <p>Text me at <strong>(602) 935-4209</strong> with:</p>
+                    <ul class="feature-list">
+                        <li>Exact weight and/or picture of the safe</li>
+                        <li>Both pickup and dropoff addresses</li>
+                        <li>Garage to garage? Inside house?</li>
+                        <li>Any obstacles (stairs, turns, etc.)</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><em>I'll get back to you with a firm quote - usually within minutes.</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 style="text-align: center;">Difficult Obstacles? No Problem.</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem;">Let me know about any of these so I can plan accordingly and give you an accurate quote.</p>
+            <div class="obstacles-grid">
+                <div class="obstacle-item">
+                    <div class="icon">🪜</div>
+                    <h4>Stairs & Steps</h4>
+                    <p>Beyond door threshold</p>
+                </div>
+                <div class="obstacle-item">
+                    <div class="icon">📐</div>
+                    <h4>Tight Turns</h4>
+                    <p>Especially for larger safes</p>
+                </div>
+                <div class="obstacle-item">
+                    <div class="icon">⛰️</div>
+                    <h4>Inclines/Declines</h4>
+                    <p>Driveways, ramps</p>
+                </div>
+                <div class="obstacle-item">
+                    <div class="icon">🏜️</div>
+                    <h4>Non-Paved Routes</h4>
+                    <p>Gravel, dirt paths</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 style="text-align: center;">Pricing</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto;">Transparent pricing - no surprises. Final quote depends on weight, distance, and obstacles.</p>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Light Safe</h3>
+                    <div class="price">$250<span>+</span></div>
+                    <ul>
+                        <li>Safes up to 500 lbs</li>
+                        <li>Local moves (under 25 miles)</li>
+                        <li>Ground floor to ground floor</li>
+                        <li>Floor protection included</li>
+                        <li>Insurance included</li>
+                    </ul>
+                    <a href="tel:+16029354209" class="pricing-btn">Get Exact Quote</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Standard Safe</h3>
+                    <div class="price">$350<span>+</span></div>
+                    <ul>
+                        <li>Safes 500-900 lbs</li>
+                        <li>Local moves</li>
+                        <li>I move it myself</li>
+                        <li>Professional equipment</li>
+                        <li>Full coverage insurance</li>
+                    </ul>
+                    <a href="tel:+16029354209" class="pricing-btn">Get Exact Quote</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Heavy Safe</h3>
+                    <div class="price">$450<span>+</span></div>
+                    <ul>
+                        <li>Safes 900-2,000+ lbs</li>
+                        <li>Helper included</li>
+                        <li>Hydraulic equipment</li>
+                        <li>Custom route planning</li>
+                        <li>Enhanced insurance</li>
+                    </ul>
+                    <a href="tel:+16029354209" class="pricing-btn">Get Exact Quote</a>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem; color: #666;"><strong>Stairs:</strong> +$75 per flight | <strong>Distance:</strong> +$2/mile beyond 25 miles</p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item active">
+                <div class="faq-question">Do I need to help with the move?</div>
+                <div class="faq-answer">Nope! I just need access to both pick up and drop off locations and I handle the rest. I bring all the equipment needed.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can you move my safe up or down stairs?</div>
+                <div class="faq-answer">Yes! I handle stair moves regularly. Each flight adds $75 to the price. Just let me know about any stairs, tight turns, or obstacles when you reach out for a quote.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">When do I pay?</div>
+                <div class="faq-answer">You can pay after the service is complete. I accept Cash, Check, Venmo, Zelle, and Cash App.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can you bolt down my safe after moving it?</div>
+                <div class="faq-answer">Yes! Bolt-down service is $75. I drill into concrete and secure it properly. Just let me know when you request a quote.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What areas do you service?</div>
+                <div class="faq-answer">I provide gun safe moving services in Gilbert, Mesa, Chandler, Tempe, Phoenix and Scottsdale. I can go outside of Phoenix metropolitan area too - just ask!</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Move Your Gun Safe?</h2>
+            <p>Text is best - send me a photo of your safe and both addresses for a quick quote.</p>
+            <div class="cta-buttons">
+                <a href="sms:+16029354209?body=Hi%20Ryan,%20I%20need%20a%20gun%20safe%20moved.%20Here's%20the%20info:" class="cta-btn primary">💬 Text Ryan Now</a>
+                <a href="tel:+16029354209" class="cta-btn secondary">📞 Call (602) 935-4209</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Curl Moving | Gilbert, Arizona | <a href="tel:+16029354209">(602) 935-4209</a> | <a href="https://www.instagram.com/curlmoving/">Instagram</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                q.parentElement.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vending Machine Moving Services in Arizona | Curl Moving</title>
+    <meta name="description" content="Professional vending machine moving in Gilbert, Mesa, Chandler, Phoenix, and all of Arizona. Full-time vending machine specialist. Call Ryan at (602) 935-4209.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header { background: #1e3a5f; color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+        header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .logo span { color: #4a9eff; }
+        nav a { color: white; text-decoration: none; margin-left: 1.5rem; font-weight: 500; }
+        nav a:hover { color: #4a9eff; }
+        .header-cta { background: #e74c3c; padding: 0.5rem 1rem; border-radius: 5px; color: white; text-decoration: none; font-weight: bold; }
+        
+        .hero { background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; padding: 4rem 0; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero .subtitle { font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem; max-width: 700px; }
+        .hero-cta { display: inline-block; background: #e74c3c; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; margin-right: 1rem; margin-bottom: 0.5rem; }
+        
+        .content-section { padding: 4rem 0; }
+        .content-section:nth-child(even) { background: #f8f9fa; }
+        .content-section h2 { font-size: 2rem; color: #1e3a5f; margin-bottom: 1.5rem; }
+        .content-section p { margin-bottom: 1rem; color: #555; font-size: 1.1rem; }
+        
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+        
+        .feature-list { list-style: none; }
+        .feature-list li { padding: 1rem; padding-left: 3rem; position: relative; background: white; margin-bottom: 0.75rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .feature-list li::before { content: "✓"; position: absolute; left: 1rem; color: #27ae60; font-weight: bold; font-size: 1.2rem; }
+        
+        .highlight-box { background: #e8f5e9; border-left: 4px solid #27ae60; padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .highlight-box h3 { color: #1e7e34; margin-bottom: 0.5rem; }
+        
+        .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .warning-box h3 { color: #856404; margin-bottom: 0.5rem; }
+        
+        .faq-section { padding: 4rem 0; }
+        .faq-section h2 { text-align: center; color: #1e3a5f; margin-bottom: 2rem; }
+        .faq-item { background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .faq-question { padding: 1.5rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question:hover { background: #f8f9fa; }
+        .faq-answer { padding: 0 1.5rem 1.5rem; color: #555; display: none; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question::after { content: "−"; }
+        .faq-question::after { content: "+"; font-size: 1.5rem; color: #1e3a5f; }
+        
+        .service-area { padding: 4rem 0; background: #f8f9fa; }
+        .service-area h2 { text-align: center; color: #1e3a5f; margin-bottom: 2rem; }
+        .area-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; max-width: 800px; margin: 0 auto; }
+        .area-item { background: white; padding: 1rem; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .area-item.home { background: #1e3a5f; color: white; }
+        
+        .payment-section { padding: 3rem 0; }
+        .payment-section h2 { text-align: center; color: #1e3a5f; margin-bottom: 2rem; }
+        .payment-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .payment-item { background: #f8f9fa; padding: 1rem 1.5rem; border-radius: 8px; font-weight: 500; }
+        .payment-item.note { background: #fff3cd; color: #856404; }
+        
+        .cta-section { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 4rem 0; text-align: center; }
+        .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-btn { display: inline-block; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        .cta-btn.primary { background: white; color: #e74c3c; }
+        .cta-btn.secondary { background: transparent; color: white; border: 2px solid white; }
+        
+        .contact-card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 400px; margin: 2rem auto; text-align: center; }
+        .contact-card h3 { color: #1e3a5f; margin-bottom: 1rem; }
+        .contact-card .phone { font-size: 1.5rem; font-weight: bold; color: #e74c3c; }
+        .contact-card p { color: #666; margin-top: 0.5rem; }
+        
+        footer { background: #1a1a2e; color: white; padding: 2rem 0; text-align: center; }
+        footer a { color: #4a9eff; text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Curl<span>Moving</span></a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="gun-safe-movers.html">Gun Safes</a>
+                <a href="tool-box-movers.html">Tool Boxes</a>
+                <a href="vending-machine-movers.html">Vending Machines</a>
+            </nav>
+            <a href="tel:+16029354209" class="header-cta">📞 (602) 935-4209</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>🥤 Vending Machine Moving in Arizona</h1>
+            <p class="subtitle">Hey there! I'm Ryan Kearl, the owner of my own vending machine company, and I specialize in moving machines full-time. With years of experience, you can trust us to handle your vending machines with care and precision.</p>
+            <a href="tel:+16029354209" class="hero-cta">📱 Call Ryan</a>
+            <a href="tel:+16029354209" class="hero-cta" style="background: #27ae60;">📱 Call Luis</a>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="two-col">
+                <div>
+                    <h2>Why Choose Curl Moving?</h2>
+                    <p>Based out of Gilbert, AZ, Curl Moving offers personalized and expert vending machine moving services.</p>
+                    <ul class="feature-list">
+                        <li><strong>Full-time vending specialist</strong> - This is all I do</li>
+                        <li><strong>Own a vending company</strong> - I know these machines inside out</li>
+                        <li><strong>Well-maintained trucks</strong> - Equipped for any situation</li>
+                        <li><strong>State compliant</strong> - All regulations followed</li>
+                        <li><strong>Professional & reliable</strong> - Show up on time, every time</li>
+                    </ul>
+                </div>
+                <div>
+                    <h2>Before Your Move</h2>
+                    <div class="warning-box">
+                        <h3>⚠️ Drink Machines</h3>
+                        <p><strong>Must be unloaded completely.</strong> I won't move a drink machine with products inside - too heavy and risk of damage.</p>
+                    </div>
+                    <div class="highlight-box">
+                        <h3>✓ Snack Machines</h3>
+                        <p>Don't have to unload, but note that chocolates may melt during transport on hot days.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Do I Need to Be Present?</h2>
+            <div class="two-col" style="max-width: 800px; margin: 0 auto;">
+                <div class="highlight-box" style="margin: 0;">
+                    <h3>✓ Double Doors</h3>
+                    <p>If your location has double doors with a removable middle piece, <strong>you don't have to be present.</strong></p>
+                </div>
+                <div class="warning-box" style="margin: 0;">
+                    <h3>⚠️ Single Door</h3>
+                    <p>If I have to move the vending machine through a single door, <strong>you need to be there.</strong></p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem; color: #666;"><strong>I always notify 30 minutes before I arrive at the pickup location.</strong></p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item active">
+                <div class="faq-question">Do I need to unload the vending machines before moving?</div>
+                <div class="faq-answer">For drink machines, yes - unload all of them, or I won't move the machine. Snack machines you don't have to, but note that chocolates may melt.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Do I have to be at pick up or drop off?</div>
+                <div class="faq-answer">Sometimes. If I have to move the vending machine through a single door, you need to be there. Double doors that have a removable middle piece, you don't have to be present. I always notify 30 minutes before I arrive at the pickup location.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Does my vending machine go straight to drop off after pick up?</div>
+                <div class="faq-answer">I may have other pick-ups that I need to do before your drop-off. I know the day before in the afternoon and will communicate the schedule with you.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How do I pay?</div>
+                <div class="faq-answer">Usually after the service, but you can pay before. I accept Cash, Check, Venmo, Zelle, Cash App, Apple Pay, and Credit Card (add 3.5%).</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-area">
+        <div class="container">
+            <h2>Service Areas</h2>
+            <div class="area-grid">
+                <div class="area-item home">Gilbert 🏠</div>
+                <div class="area-item">Mesa</div>
+                <div class="area-item">Chandler</div>
+                <div class="area-item">Tempe</div>
+                <div class="area-item">Phoenix</div>
+                <div class="area-item">Scottsdale</div>
+                <div class="area-item">& Nearby Areas</div>
+            </div>
+            <p style="text-align: center; margin-top: 1.5rem; color: #666;">Can go outside Phoenix metro - just ask!</p>
+        </div>
+    </section>
+
+    <section class="payment-section">
+        <div class="container">
+            <h2>Payment Methods</h2>
+            <div class="payment-grid">
+                <div class="payment-item">💵 Cash</div>
+                <div class="payment-item">📝 Check</div>
+                <div class="payment-item">📱 Venmo</div>
+                <div class="payment-item">💸 Zelle</div>
+                <div class="payment-item">📲 Cash App</div>
+                <div class="payment-item">🍎 Apple Pay</div>
+                <div class="payment-item note">💳 Credit Card (+3.5%)</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Move Your Vending Machine?</h2>
+            <p>Let us handle the heavy lifting while you focus on your business.</p>
+            
+            <div class="contact-card" style="display: inline-block; margin: 0 1rem 1rem;">
+                <h3>Ryan</h3>
+                <div class="phone">(602) 935-4209</div>
+                <p>Owner</p>
+            </div>
+            <div class="contact-card" style="display: inline-block; margin: 0 1rem 1rem;">
+                <h3>Luis</h3>
+                <div class="phone">(602) 935-4209</div>
+                <p>Team Member</p>
+            </div>
+            
+            <div class="cta-buttons" style="margin-top: 2rem;">
+                <a href="tel:+16029354209" class="cta-btn primary">📞 Call Now</a>
+                <a href="sms:+16029354209" class="cta-btn secondary">💬 Text Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Curl Moving | Gilbert, Arizona 85286 | <a href="tel:+16029354209">(602) 935-4209</a> | <a href="https://www.instagram.com/curlmoving/">Instagram</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                q.parentElement.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

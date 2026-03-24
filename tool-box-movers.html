@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Box Moving Services in Arizona | Curl Moving</title>
+    <meta name="description" content="Professional tool box moving in Arizona. Snap-on, Matco, Mac Tools - I move them all. Based in Gilbert, serving Phoenix metro. Call Ryan at (602) 935-4209.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header { background: #1e3a5f; color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+        header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .logo span { color: #4a9eff; }
+        nav a { color: white; text-decoration: none; margin-left: 1.5rem; font-weight: 500; }
+        nav a:hover { color: #4a9eff; }
+        .header-cta { background: #e74c3c; padding: 0.5rem 1rem; border-radius: 5px; color: white; text-decoration: none; font-weight: bold; }
+        
+        .hero { background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; padding: 4rem 0; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero .subtitle { font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem; max-width: 700px; }
+        .hero-cta { display: inline-block; background: #e74c3c; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        
+        .content-section { padding: 4rem 0; }
+        .content-section:nth-child(even) { background: #f8f9fa; }
+        .content-section h2 { font-size: 2rem; color: #1e3a5f; margin-bottom: 1.5rem; }
+        .content-section p { margin-bottom: 1rem; color: #555; font-size: 1.1rem; }
+        
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+        
+        .feature-list { list-style: none; }
+        .feature-list li { padding: 1rem; padding-left: 3rem; position: relative; background: white; margin-bottom: 0.75rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .feature-list li::before { content: "✓"; position: absolute; left: 1rem; color: #27ae60; font-weight: bold; font-size: 1.2rem; }
+        
+        .brands-section { text-align: center; padding: 3rem 0; background: #f8f9fa; }
+        .brands-section h2 { color: #1e3a5f; margin-bottom: 2rem; }
+        .brands-grid { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+        .brand-item { font-size: 1.5rem; font-weight: bold; color: #666; padding: 1rem 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        
+        .process-section { padding: 4rem 0; }
+        .process-section h2 { text-align: center; color: #1e3a5f; margin-bottom: 3rem; }
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .process-step { text-align: center; padding: 2rem; }
+        .process-number { width: 60px; height: 60px; background: #1e3a5f; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin: 0 auto 1rem; }
+        .process-step h3 { color: #1e3a5f; margin-bottom: 0.5rem; }
+        .process-step p { color: #666; }
+        
+        .tips-section { background: #fff3cd; padding: 2rem; border-radius: 12px; margin: 2rem 0; }
+        .tips-section h3 { color: #856404; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .tips-section ul { list-style: none; }
+        .tips-section li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
+        .tips-section li::before { content: "→"; position: absolute; left: 0; color: #856404; }
+        
+        .faq-section { padding: 4rem 0; background: #f8f9fa; }
+        .faq-section h2 { text-align: center; color: #1e3a5f; margin-bottom: 2rem; }
+        .faq-item { background: white; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; max-width: 800px; margin-left: auto; margin-right: auto; margin-bottom: 1rem; }
+        .faq-question { padding: 1.5rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question:hover { background: #f8f9fa; }
+        .faq-answer { padding: 0 1.5rem 1.5rem; color: #555; display: none; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question::after { content: "−"; }
+        .faq-question::after { content: "+"; font-size: 1.5rem; color: #1e3a5f; }
+        
+        .instagram-section { padding: 3rem 0; text-align: center; }
+        .instagram-section h2 { color: #1e3a5f; margin-bottom: 1rem; }
+        .instagram-btn { display: inline-block; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        
+        .cta-section { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 4rem 0; text-align: center; }
+        .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-btn { display: inline-block; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        .cta-btn.primary { background: white; color: #e74c3c; }
+        .cta-btn.secondary { background: transparent; color: white; border: 2px solid white; }
+        
+        footer { background: #1a1a2e; color: white; padding: 2rem 0; text-align: center; }
+        footer a { color: #4a9eff; text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">Curl<span>Moving</span></a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="gun-safe-movers.html">Gun Safes</a>
+                <a href="tool-box-movers.html">Tool Boxes</a>
+                <a href="vending-machine-movers.html">Vending Machines</a>
+            </nav>
+            <a href="tel:+16029354209" class="header-cta">📞 (602) 935-4209</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>🧰 Tool Box Moving in Arizona</h1>
+            <p class="subtitle">Hey there, I'm Ryan Kearl, and I'm passionate about helping you move your tool box hassle-free! Since 2020 I've been moving only the heavy stuff. Pretty simple process - I roll the box onto my drop deck trailer and strap down.</p>
+            <a href="tel:+16029354209" class="hero-cta">📱 Text or Call Ryan: (602) 935-4209</a>
+        </div>
+    </section>
+
+    <section class="brands-section">
+        <h2>I Move All Major Brands</h2>
+        <div class="brands-grid">
+            <div class="brand-item">Snap-on</div>
+            <div class="brand-item">Matco</div>
+            <div class="brand-item">Mac Tools</div>
+            <div class="brand-item">Cornwell</div>
+            <div class="brand-item">US General</div>
+            <div class="brand-item">& More</div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="two-col">
+                <div>
+                    <h2>How I Move Your Tool Box</h2>
+                    <p>I bring all the equipment needed. I show up on time and get the work done fast and safely.</p>
+                    <ul class="feature-list">
+                        <li>Roll box onto my drop deck trailer</li>
+                        <li>Secure with professional straps</li>
+                        <li>Transport safely to destination</li>
+                        <li>Roll off at new location</li>
+                        <li>Done - usually within an hour!</li>
+                    </ul>
+                </div>
+                <div>
+                    <h2>What You Need to Do</h2>
+                    <div class="tips-section">
+                        <h3>💡 Before I Arrive</h3>
+                        <ul>
+                            <li><strong>Leave it loaded</strong> - no need to empty your box</li>
+                            <li><strong>Lock all drawers</strong> - keeps everything secure</li>
+                            <li><strong>Remove loose items</strong> - anything on the outside</li>
+                            <li><strong>Tell me about hutches</strong> - if top/side hutch is bolted, let me know</li>
+                        </ul>
+                    </div>
+                    <p style="margin-top: 1rem;"><em>I'll run a strap around hutches either way for extra security.</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="process-number">1</div>
+                    <h3>Text Me</h3>
+                    <p>Send me a photo of your toolbox and both addresses. I'll reply with a firm quote fast.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">2</div>
+                    <h3>Schedule</h3>
+                    <p>Pick a date that works. I confirm the day before with your arrival window.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">3</div>
+                    <h3>I Show Up</h3>
+                    <p>I arrive on time with everything needed. You just provide access.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-number">4</div>
+                    <h3>Pay When Done</h3>
+                    <p>Once your box is safely delivered, you pay. Simple as that.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item active">
+                <div class="faq-question">Do I need to help with the move?</div>
+                <div class="faq-answer">Nope! I just need to get access to both pick up and drop off and I can do the rest.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Should I empty my toolbox before the move?</div>
+                <div class="faq-answer">You can leave it loaded! Just lock the drawers and remove anything loose on the outside. If you have a top or side hutch, let me know if it's bolted - I'll run a strap around it either way.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">When do I pay?</div>
+                <div class="faq-answer">You can pay after the service. I accept Cash, Check, Venmo, Zelle, Cash App.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can you do same-day pickup and delivery?</div>
+                <div class="faq-answer">Generally yes, but sometimes I have moves in-between especially for longer distance moves. I finalize the schedule the day before so you know exactly what will happen on move day.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What areas do you service?</div>
+                <div class="faq-answer">I'm based in Gilbert and service all of Phoenix, Scottsdale, Mesa, Chandler, Tempe, and surrounding areas. I can go outside Phoenix metro too - just ask!</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="instagram-section">
+        <h2>See My Work</h2>
+        <p style="margin-bottom: 1.5rem; color: #666;">Check out recent toolbox moves on Instagram</p>
+        <a href="https://www.instagram.com/curlmoving/" target="_blank" class="instagram-btn">📸 @curlmoving on Instagram</a>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Move Your Tool Box?</h2>
+            <p>Text is best - I try to answer calls when able. Thank you!</p>
+            <div class="cta-buttons">
+                <a href="sms:+16029354209?body=Hi%20Ryan,%20I%20need%20a%20toolbox%20moved.%20Here's%20the%20info:" class="cta-btn primary">💬 Text Ryan Now</a>
+                <a href="tel:+16029354209" class="cta-btn secondary">📞 Call (602) 935-4209</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Curl Moving | Gilbert, Arizona | <a href="tel:+16029354209">(602) 935-4209</a> | <a href="https://www.instagram.com/curlmoving/">Instagram</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                q.parentElement.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

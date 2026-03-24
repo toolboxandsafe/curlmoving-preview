@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curl Moving | Professional Gun Safe, Tool Box & Vending Machine Moving in Arizona</title>
+    <meta name="description" content="Family-owned Arizona moving company specializing in gun safes, tool boxes, and vending machines. Based in Gilbert, serving all of Phoenix metro. Call Ryan at (602) 935-4209.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { background: #1e3a5f; color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+        header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: bold; }
+        .logo span { color: #4a9eff; }
+        nav a { color: white; text-decoration: none; margin-left: 1.5rem; font-weight: 500; }
+        nav a:hover { color: #4a9eff; }
+        .header-cta { background: #e74c3c; padding: 0.5rem 1rem; border-radius: 5px; color: white; text-decoration: none; font-weight: bold; }
+        .header-cta:hover { background: #c0392b; }
+        
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; padding: 4rem 0; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero .subtitle { font-size: 1.25rem; opacity: 0.9; margin-bottom: 2rem; max-width: 600px; }
+        .hero-cta { display: inline-block; background: #e74c3c; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
+        .hero-cta:hover { background: #c0392b; }
+        
+        /* Stats */
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; padding: 3rem 0; background: #f8f9fa; }
+        .stat { text-align: center; }
+        .stat-number { font-size: 2.5rem; font-weight: bold; color: #1e3a5f; }
+        .stat-label { color: #666; }
+        
+        /* Services */
+        .services { padding: 4rem 0; }
+        .services h2 { text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #1e3a5f; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .service-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 2px solid #eee; transition: transform 0.3s, box-shadow 0.3s; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .service-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .service-card h3 { color: #1e3a5f; margin-bottom: 1rem; font-size: 1.5rem; }
+        .service-card p { color: #666; margin-bottom: 1.5rem; }
+        .service-card ul { list-style: none; margin-bottom: 1.5rem; }
+        .service-card li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
+        .service-card li::before { content: "✓"; position: absolute; left: 0; color: #27ae60; font-weight: bold; }
+        .service-link { display: inline-block; background: #1e3a5f; color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; }
+        .service-link:hover { background: #2c5282; }
+        
+        /* Why Choose */
+        .why-choose { background: #1e3a5f; color: white; padding: 4rem 0; }
+        .why-choose h2 { text-align: center; font-size: 2rem; margin-bottom: 3rem; }
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .why-item { text-align: center; padding: 1.5rem; }
+        .why-item .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .why-item h3 { margin-bottom: 0.5rem; }
+        .why-item p { opacity: 0.9; }
+        
+        /* Service Area */
+        .service-area { padding: 4rem 0; background: #f8f9fa; }
+        .service-area h2 { text-align: center; font-size: 2rem; margin-bottom: 1rem; color: #1e3a5f; }
+        .service-area .subtitle { text-align: center; color: #666; margin-bottom: 3rem; }
+        .area-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 800px; margin: 0 auto; }
+        .area-card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .area-card h3 { color: #1e3a5f; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .area-card ul { list-style: none; }
+        .area-card li { padding: 0.4rem 0; color: #555; }
+        
+        /* CTA Section */
+        .cta-section { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 4rem 0; text-align: center; }
+        .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-btn { display: inline-block; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
+        .cta-btn.primary { background: white; color: #e74c3c; }
+        .cta-btn.secondary { background: transparent; color: white; border: 2px solid white; }
+        
+        /* Footer */
+        footer { background: #1a1a2e; color: white; padding: 3rem 0; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+        .footer-section h4 { margin-bottom: 1rem; color: #4a9eff; }
+        .footer-section p, .footer-section a { color: #ccc; text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .footer-section a:hover { color: white; }
+        .footer-bottom { text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #333; color: #888; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            nav { display: none; }
+            .stat-number { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Curl<span>Moving</span></div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="gun-safe-movers.html">Gun Safes</a>
+                <a href="tool-box-movers.html">Tool Boxes</a>
+                <a href="vending-machine-movers.html">Vending Machines</a>
+            </nav>
+            <a href="tel:+16029354209" class="header-cta">📞 (602) 935-4209</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Hey, I'm Ryan. I Move the Heavy Stuff.</h1>
+            <p class="subtitle">Family-owned, Arizona-based. Since 2020 I've been specializing in gun safes, tool boxes, and vending machines. I bring all the equipment, show up on time, and get it done right.</p>
+            <a href="tel:+16029354209" class="hero-cta">📱 Call or Text (602) 935-4209</a>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container" style="display: contents;">
+            <div class="stat">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Moves Completed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">2000</div>
+                <div class="stat-label">Max Lbs Capacity</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Fully Insured</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2>What I Move</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔐</div>
+                    <h3>Gun Safe Moving</h3>
+                    <p>I understand safes need to be handled right. Your security and peace of mind is my priority.</p>
+                    <ul>
+                        <li>Safes under 900 lbs - I move alone</li>
+                        <li>900+ lbs - I bring a helper</li>
+                        <li>Stairs, tight turns, no problem</li>
+                        <li>Fully licensed & insured</li>
+                    </ul>
+                    <a href="gun-safe-movers.html" class="service-link">Learn More →</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🧰</div>
+                    <h3>Tool Box Moving</h3>
+                    <p>I roll your box onto my drop deck trailer and strap it down. Simple, fast, and safe.</p>
+                    <ul>
+                        <li>Snap-on, Matco, Mac Tools - all of them</li>
+                        <li>Leave it loaded, just lock drawers</li>
+                        <li>Shop to shop or wherever you need</li>
+                        <li>Fully insured</li>
+                    </ul>
+                    <a href="tool-box-movers.html" class="service-link">Learn More →</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🥤</div>
+                    <h3>Vending Machine Moving</h3>
+                    <p>I own my own vending machine company, so I know exactly how to handle these.</p>
+                    <ul>
+                        <li>Full-time vending specialist</li>
+                        <li>Well-maintained equipment</li>
+                        <li>Gilbert, Mesa, Chandler & beyond</li>
+                        <li>Professional & precise</li>
+                    </ul>
+                    <a href="vending-machine-movers.html" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose">
+        <div class="container">
+            <h2>Why Work With Me?</h2>
+            <div class="why-grid">
+                <div class="why-item">
+                    <div class="icon">🎯</div>
+                    <h3>Specialists Only</h3>
+                    <p>I don't move furniture or boxes. Just safes, toolboxes, and vending machines. That's why I'm good at it.</p>
+                </div>
+                <div class="why-item">
+                    <div class="icon">🛡️</div>
+                    <h3>Fully Insured</h3>
+                    <p>Your stuff is covered. I carry full insurance so you don't have to worry.</p>
+                </div>
+                <div class="why-item">
+                    <div class="icon">📍</div>
+                    <h3>Based in Gilbert</h3>
+                    <p>I know the Phoenix area. Gilbert, Mesa, Chandler, Tempe, Scottsdale - I'm local.</p>
+                </div>
+                <div class="why-item">
+                    <div class="icon">💪</div>
+                    <h3>Family Owned</h3>
+                    <p>No call centers, no random crews. Just a small family business doing honest work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-area">
+        <div class="container">
+            <h2>Service Area</h2>
+            <p class="subtitle">Based in Gilbert, serving all of Phoenix metro and beyond</p>
+            <div class="area-grid">
+                <div class="area-card">
+                    <h3>📍 Primary Service Area</h3>
+                    <p style="color: #27ae60; font-weight: 600; margin-bottom: 1rem;">Base rate pricing</p>
+                    <ul>
+                        <li>Gilbert (Home Base)</li>
+                        <li>Mesa</li>
+                        <li>Chandler</li>
+                        <li>Phoenix</li>
+                        <li>Scottsdale</li>
+                        <li>Tempe</li>
+                    </ul>
+                </div>
+                <div class="area-card">
+                    <h3>🚛 Extended Service Area</h3>
+                    <p style="color: #e67e22; font-weight: 600; margin-bottom: 1rem;">Additional mileage fees may apply</p>
+                    <ul>
+                        <li>Glendale & Peoria</li>
+                        <li>Surprise & Goodyear</li>
+                        <li>Queen Creek & San Tan</li>
+                        <li>Cave Creek & Fountain Hills</li>
+                        <li>Tucson (call for quote)</li>
+                        <li>Anywhere in Arizona!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Get a Quote?</h2>
+            <p>Text is best - I'll get back to you fast with a firm price.</p>
+            <div class="cta-buttons">
+                <a href="tel:+16029354209" class="cta-btn primary">📞 Call (602) 935-4209</a>
+                <a href="sms:+16029354209" class="cta-btn secondary">💬 Text Me</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Curl Moving</h4>
+                    <p>Family-owned moving company specializing in heavy equipment since 2020.</p>
+                    <p>Gilbert, Arizona 85286</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <a href="gun-safe-movers.html">Gun Safe Moving</a>
+                    <a href="tool-box-movers.html">Tool Box Moving</a>
+                    <a href="vending-machine-movers.html">Vending Machine Moving</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <a href="tel:+16029354209">📞 (602) 935-4209</a>
+                    <a href="sms:+16029354209">💬 Text Ryan</a>
+                    <a href="https://www.instagram.com/curlmoving/" target="_blank">📸 Instagram</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Payment Methods</h4>
+                    <p>Cash, Check, Venmo, Zelle, Cash App, Apple Pay, Credit Card (+3.5%)</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Curl Moving. All rights reserved. | Gilbert, Arizona</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
