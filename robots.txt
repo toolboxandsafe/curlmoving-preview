@@ -1,0 +1,9 @@
+# Curl Moving - robots.txt
+User-agent: *
+Allow: /
+
+# Don't index thank you page
+Disallow: /thanks.html
+
+# Sitemap location
+Sitemap: https://curlmoving.com/sitemap.xml
