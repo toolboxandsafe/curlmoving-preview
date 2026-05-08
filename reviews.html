@@ -3,194 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reviews - Curl Moving | 5-Star Customer Reviews</title>
-    <meta name="description" content="Read 5-star reviews from Curl Moving customers. See why Arizona trusts us for gun safe, tool box, and vending machine moving.">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        header { background: #1e3a5f; color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
-        header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
-        .logo span { color: #4a9eff; }
-        nav a { color: white; text-decoration: none; margin-left: 1.5rem; font-weight: 500; }
-        nav a:hover { color: #4a9eff; }
-        .header-cta { background: #e74c3c; padding: 0.5rem 1rem; border-radius: 5px; color: white; text-decoration: none; font-weight: bold; }
-        
-        .hero { background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; padding: 4rem 0; text-align: center; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .hero .stars { font-size: 2rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.25rem; opacity: 0.9; }
-        
-        .review-links { padding: 3rem 0; background: #f8f9fa; }
-        .review-links h2 { text-align: center; color: #1e3a5f; margin-bottom: 2rem; }
-        .links-grid { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-        .review-link { display: flex; align-items: center; gap: 1rem; background: white; padding: 1.5rem 2rem; border-radius: 12px; text-decoration: none; color: #333; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .review-link:hover { transform: translateY(-3px); }
-        .review-link .icon { font-size: 2.5rem; }
-        .review-link .text { text-align: left; }
-        .review-link .text strong { display: block; font-size: 1.2rem; }
-        .review-link .text span { color: #666; }
-        
-        .reviews-section { padding: 4rem 0; }
-        .reviews-section h2 { text-align: center; color: #1e3a5f; margin-bottom: 3rem; }
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
-        .review-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        .review-card .stars { color: #f1c40f; font-size: 1.2rem; margin-bottom: 1rem; }
-        .review-card .quote { font-style: italic; color: #555; margin-bottom: 1.5rem; font-size: 1.05rem; line-height: 1.7; }
-        .review-card .author { display: flex; align-items: center; gap: 1rem; }
-        .review-card .avatar { width: 50px; height: 50px; background: #1e3a5f; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; }
-        .review-card .author-info strong { display: block; color: #333; }
-        .review-card .author-info span { color: #666; font-size: 0.9rem; }
-        
-        .cta-section { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 4rem 0; text-align: center; }
-        .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
-        .cta-section p { margin-bottom: 2rem; font-size: 1.2rem; }
-        .cta-btn { display: inline-block; background: white; color: #e74c3c; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: bold; margin: 0.5rem; }
-        
-        footer { background: #1a1a2e; color: white; padding: 2rem 0; text-align: center; }
-        footer a { color: #4a9eff; text-decoration: none; }
-        @media (max-width: 768px) { .hero h1 { font-size: 1.8rem; } nav { display: none; } .reviews-grid { grid-template-columns: 1fr; } }
-    </style>
+    <title>Reviews — Curl Moving | 5-Star Customer Reviews</title>
+    <meta name="description" content="Read 5-star reviews from Curl Moving customers across Arizona. See why we're trusted for gun safe, tool box, and vending machine moving.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://curlmoving.com/reviews.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://curlmoving.com/reviews.html">
+    <meta property="og:title" content="Curl Moving Reviews | 5-Star Heavy-Item Movers, Arizona">
+    <meta property="og:description" content="Word of mouth across the East Valley. Read what customers say about gun safe, toolbox, and vending machine moves.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <a href="index.html" class="logo">Curl<span>Moving</span></a>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="gun-safe-movers.html">Gun Safes</a>
-                <a href="tool-box-movers.html">Tool Boxes</a>
-                <a href="vending-machine-movers.html">Vending Machines</a>
-                <a href="reviews.html">Reviews</a>
-                <a href="about.html">About</a>
-            </nav>
-            <a href="tel:+16029354209" class="header-cta">📞 (602) 935-4209</a>
-        </div>
-    </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Customer Reviews</h1>
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>See why Arizona trusts Curl Moving for their heavy items</p>
-        </div>
-    </section>
+<div class="topbar">
+    <div class="container">
+        <span class="pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M12 2 L4 6 V12 C4 17 8 21 12 22 C16 21 20 17 20 12 V6 Z"/></svg>
+            Licensed &amp; Insured
+        </span>
+        <span class="pill">Family-Owned · Est. 2020</span>
+        <span class="pill">Mon–Fri 7a–6p · Sat 8a–4p</span>
+    </div>
+</div>
 
-    <section class="review-links">
-        <div class="container">
-            <h2>See Our 5-Star Reviews</h2>
-            <div class="links-grid">
-                <a href="https://share.google/VXlNvB4K6ukC4Xt41" target="_blank" class="review-link">
-                    <div class="icon">🔍</div>
-                    <div class="text">
-                        <strong>Google Reviews</strong>
-                        <span>See all reviews on Google</span>
-                    </div>
-                </a>
-                <a href="https://www.facebook.com/CurlMoving/reviews" target="_blank" class="review-link">
-                    <div class="icon">📘</div>
-                    <div class="text">
-                        <strong>Facebook Reviews</strong>
-                        <span>See all reviews on Facebook</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
+<header class="site">
+    <div class="container">
+        <a href="index.html" class="brand" aria-label="Curl Moving — home">
+            <span class="brand-mark" aria-hidden="true">CM</span>
+            <span>Curl<span class="amp"> / </span>Moving</span>
+        </a>
+        <input type="checkbox" id="navtoggle" class="nav-toggle" aria-hidden="true">
+        <label for="navtoggle" class="menu-btn">Menu</label>
+        <nav class="primary" aria-label="Main">
+            <a href="index.html">Home</a>
+            <a href="gun-safe-movers.html">Gun Safes</a>
+            <a href="tool-box-movers.html">Tool Boxes</a>
+            <a href="vending-machine-movers.html">Vending</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="about.html">About</a>
+        </nav>
+        <a href="tel:+16029354209" class="header-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 4 H9 L11 9 L8.5 10.5 C9.5 13 11 14.5 13.5 15.5 L15 13 L20 15 V19 C20 19.5 19.5 20 19 20 C11 20 4 13 4 5 C4 4.5 4.5 4 5 4 Z"/></svg>
+            (602) 935-4209
+        </a>
+    </div>
+</header>
 
-    <section class="reviews-section">
-        <div class="container">
-            <h2>What People Are Saying</h2>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Had a 1,200 lb Liberty safe that needed to go from the garage up to my second-floor office. Ryan came prepared with the right equipment and moved it without a single scratch. Worth every penny."</p>
-                    <div class="author">
-                        <div class="avatar">M</div>
-                        <div class="author-info">
-                            <strong>Mike T.</strong>
-                            <span>Gilbert, AZ</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"I was worried about my $15k Snap-on box getting damaged during my shop relocation. Ryan secured every drawer, padded everything, and delivered it in perfect condition. True professionals."</p>
-                    <div class="author">
-                        <div class="avatar">J</div>
-                        <div class="author-info">
-                            <strong>James R.</strong>
-                            <span>Mesa, AZ</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Moved my grandfather's antique gun safe - it's been in the family for 60 years. Ryan treated it like it was his own. Navigated a tight stairwell I didn't think was possible. Highly recommend!"</p>
-                    <div class="author">
-                        <div class="avatar">S</div>
-                        <div class="author-info">
-                            <strong>Sarah K.</strong>
-                            <span>Scottsdale, AZ</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Called on a Saturday morning, Ryan was at my house by noon. Fast, professional, and the price was exactly what he quoted. No surprises. This is how moving should be done."</p>
-                    <div class="author">
-                        <div class="avatar">D</div>
-                        <div class="author-info">
-                            <strong>David M.</strong>
-                            <span>Chandler, AZ</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Two 800 lb gun safes into the basement - and my stairs have a 90-degree turn. Ryan surveyed the route first, removed a railing, and got both safes down safely. Amazing work!"</p>
-                    <div class="author">
-                        <div class="avatar">R</div>
-                        <div class="author-info">
-                            <strong>Robert H.</strong>
-                            <span>Phoenix, AZ</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Finally found a company that specializes in this. Other movers wouldn't even quote my Matco toolbox. Ryan knew exactly what he was doing from the first call."</p>
-                    <div class="author">
-                        <div class="avatar">C</div>
-                        <div class="author-info">
-                            <strong>Carlos V.</strong>
-                            <span>Tempe, AZ</span>
-                        </div>
+<section class="hero-inner grit">
+    <div class="container">
+        <div class="hero-eyebrow">
+            <span class="tag">// REVIEWS</span>
+            <span>5-Star · Word of mouth across Arizona</span>
+        </div>
+        <h1>★★★★★<br><span class="accent">Word travels.</span></h1>
+        <p class="hero-sub">Most of my work comes from referrals — neighbors, mechanics, shop owners, and families passing my name along. Read what they're saying, then text me.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head compact">
+            <h2><span class="num">// 01 — Platforms</span>See the originals.</h2>
+            <p class="lede">Reviews live where customers wrote them — Google and Facebook. Read every review, not just my favorites.</p>
+        </div>
+        <div class="review-platforms">
+            <a href="https://share.google/VXlNvB4K6ukC4Xt41" target="_blank" rel="noopener">
+                <span class="icon">G</span>
+                <span>
+                    <strong>Google Reviews</strong>
+                    <span>// All reviews on Google →</span>
+                </span>
+            </a>
+            <a href="https://www.facebook.com/CurlMoving/reviews" target="_blank" rel="noopener">
+                <span class="icon">F</span>
+                <span>
+                    <strong>Facebook Reviews</strong>
+                    <span>// All reviews on Facebook →</span>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section dark grit" style="padding-top: 0;">
+    <div class="container" style="padding-top: 96px;">
+        <div class="section-head compact">
+            <h2><span class="num">// 02 — Selected reviews</span>What people<br>are saying.</h2>
+            <p class="lede">Six recent reviews from gun safe, toolbox, and vending machine moves across the East Valley.</p>
+        </div>
+        <div class="review-grid" style="background: var(--c-coal); border-color: var(--c-rule-dk);">
+            <div class="review-card" style="background: var(--c-coal); color: var(--c-bone); border-color: var(--c-rule-dk);">
+                <div class="stars">★★★★★</div>
+                <p class="quote" style="color: var(--c-bone);">Had a 1,200 lb Liberty safe that needed to go from the garage up to my second-floor office. Ryan came prepared with the right equipment and moved it without a single scratch. Worth every penny.</p>
+                <div class="author" style="border-top-color: var(--c-rule-dk);">
+                    <div class="avatar">M</div>
+                    <div class="author-info">
+                        <strong style="color: var(--c-bone);">Mike T.</strong>
+                        <span>Gilbert, AZ</span>
                     </div>
                 </div>
             </div>
+            <div class="review-card" style="background: var(--c-coal); color: var(--c-bone); border-color: var(--c-rule-dk);">
+                <div class="stars">★★★★★</div>
+                <p class="quote" style="color: var(--c-bone);">I was worried about my $15k Snap-on box getting damaged during my shop relocation. Ryan secured every drawer, padded everything, and delivered it in perfect condition. True professionals.</p>
+                <div class="author" style="border-top-color: var(--c-rule-dk);">
+                    <div class="avatar">J</div>
+                    <div class="author-info">
+                        <strong style="color: var(--c-bone);">James R.</strong>
+                        <span>Mesa, AZ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card" style="background: var(--c-coal); color: var(--c-bone); border-color: var(--c-rule-dk);">
+                <div class="stars">★★★★★</div>
+                <p class="quote" style="color: var(--c-bone);">Moved my grandfather's antique gun safe — it's been in the family for 60 years. Ryan treated it like it was his own. Navigated a tight stairwell I didn't think was possible. Highly recommend!</p>
+                <div class="author" style="border-top-color: var(--c-rule-dk);">
+                    <div class="avatar">S</div>
+                    <div class="author-info">
+                        <strong style="color: var(--c-bone);">Sarah K.</strong>
+                        <span>Scottsdale, AZ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card" style="background: var(--c-coal); color: var(--c-bone); border-color: var(--c-rule-dk);">
+                <div class="stars">★★★★★</div>
+                <p class="quote" style="color: var(--c-bone);">Called on a Saturday morning, Ryan was at my house by noon. Fast, professional, and the price was exactly what he quoted. No surprises. This is how moving should be done.</p>
+                <div class="author" style="border-top-color: var(--c-rule-dk);">
+                    <div class="avatar">D</div>
+                    <div class="author-info">
+                        <strong style="color: var(--c-bone);">David M.</strong>
+                        <span>Chandler, AZ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card" style="background: var(--c-coal); color: var(--c-bone); border-color: var(--c-rule-dk);">
+                <div class="stars">★★★★★</div>
+                <p class="quote" style="color: var(--c-bone);">Two 800 lb gun safes into the basement — and my stairs have a 90-degree turn. Ryan surveyed the route first, removed a railing, and got both safes down safely. Amazing work!</p>
+                <div class="author" style="border-top-color: var(--c-rule-dk);">
+                    <div class="avatar">R</div>
+                    <div class="author-info">
+                        <strong style="color: var(--c-bone);">Robert H.</strong>
+                        <span>Phoenix, AZ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card" style="background: var(--c-coal); color: var(--c-bone); border-color: var(--c-rule-dk);">
+                <div class="stars">★★★★★</div>
+                <p class="quote" style="color: var(--c-bone);">Finally found a company that specializes in this. Other movers wouldn't even quote my Matco toolbox. Ryan knew exactly what he was doing from the first call.</p>
+                <div class="author" style="border-top-color: var(--c-rule-dk);">
+                    <div class="avatar">C</div>
+                    <div class="author-info">
+                        <strong style="color: var(--c-bone);">Carlos V.</strong>
+                        <span>Tempe, AZ</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Experience 5-Star Service?</h2>
-            <p>Join hundreds of satisfied customers across Arizona</p>
-            <a href="tel:+16029354209" class="cta-btn">📞 Call (602) 935-4209</a>
-            <a href="sms:+16029354209" class="cta-btn">💬 Text for Quote</a>
+<section class="cta grit">
+    <div class="container">
+        <span class="stencil-label on-dark" style="margin-bottom: 18px;">// Ready when you are</span>
+        <h2>Want 5-star service?<br>Get a quote.</h2>
+        <p>Join hundreds of satisfied customers across Arizona. Text me — I'll quote it in minutes.</p>
+        <div class="cta-buttons">
+            <a href="tel:+16029354209" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 4 H9 L11 9 L8.5 10.5 C9.5 13 11 14.5 13.5 15.5 L15 13 L20 15 V19 C20 19.5 19.5 20 19 20 C11 20 4 13 4 5 C4 4.5 4.5 4 5 4 Z"/></svg>
+                Call (602) 935-4209
+            </a>
+            <a href="sms:+16029354209" class="btn btn-ghost">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M3 5 H21 V17 H13 L8 21 V17 H3 Z"/></svg>
+                Text Ryan
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Curl Moving | Gilbert, Arizona | <a href="tel:+16029354209">(602) 935-4209</a> | <a href="https://www.instagram.com/curlmoving/">Instagram</a></p>
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-section footer-brand">
+                <a href="index.html" class="brand">
+                    <span class="brand-mark" aria-hidden="true">CM</span>
+                    <span>Curl<span class="amp"> / </span>Moving</span>
+                </a>
+                <p>Family-owned moving company specializing in heavy &amp; specialty equipment since 2020.</p>
+                <p class="addr">Gilbert, Arizona · 85286</p>
+            </div>
+            <div class="footer-section">
+                <h4>// Services</h4>
+                <a href="gun-safe-movers.html">Gun Safe Moving</a>
+                <a href="tool-box-movers.html">Tool Box Moving</a>
+                <a href="vending-machine-movers.html">Vending Machine Moving</a>
+            </div>
+            <div class="footer-section">
+                <h4>// Cities</h4>
+                <a href="gun-safe-movers-gilbert-az.html">Gilbert</a>
+                <a href="gun-safe-movers-chandler-az.html">Chandler</a>
+                <a href="gun-safe-movers-mesa-az.html">Mesa</a>
+                <a href="gun-safe-movers-phoenix-az.html">Phoenix</a>
+                <a href="gun-safe-movers-scottsdale-az.html">Scottsdale</a>
+                <a href="gun-safe-movers-tempe-az.html">Tempe</a>
+            </div>
+            <div class="footer-section">
+                <h4>// Contact</h4>
+                <a href="tel:+16029354209">(602) 935-4209</a>
+                <a href="sms:+16029354209">Text Ryan</a>
+                <a href="mailto:ryan@curlvending.com">ryan@curlvending.com</a>
+                <a href="https://www.instagram.com/curlmoving/" target="_blank" rel="noopener">Instagram →</a>
+            </div>
         </div>
-    </footer>
+        <div class="footer-bottom">
+            <span>© 2026 Curl Moving · All rights reserved</span>
+            <span>Gilbert, AZ · Built tough.</span>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>
