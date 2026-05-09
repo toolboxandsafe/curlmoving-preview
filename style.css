@@ -331,6 +331,13 @@ nav.primary a:hover { opacity: 1; color: var(--c-amber); }
 .faq summary:hover::after { background: var(--c-rust); }
 .faq details[open] summary::after { content: "−"; background: var(--c-rust); }
 .faq .answer { padding: 0 0 24px; font-size: 16px; line-height: 1.65; color: var(--c-iron); max-width: 760px; }
+.section.dark .faq details { border-top-color: var(--c-rule-dk); }
+.section.dark .faq details:last-of-type { border-bottom-color: var(--c-rule-dk); }
+.section.dark .faq summary { color: var(--c-bone); }
+.section.dark .faq summary::after { color: var(--c-coal); background: var(--c-amber); border-color: var(--c-amber); }
+.section.dark .faq summary:hover::after { background: var(--c-rust); border-color: var(--c-coal); color: var(--c-bone); }
+.section.dark .faq details[open] summary::after { background: var(--c-rust); border-color: var(--c-coal); color: var(--c-bone); }
+.section.dark .faq .answer { color: var(--c-bone); opacity: 0.85; }
 
 /* PORTRAIT / ABOUT CARD */
 .portrait-card { background: var(--c-coal); color: var(--c-bone); border: 2px solid var(--c-coal); box-shadow: 8px 8px 0 var(--c-rust); padding: 32px; text-align: center; max-width: 360px; justify-self: end; width: 100%; position: relative; }
