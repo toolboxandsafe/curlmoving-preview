@@ -19,7 +19,6 @@
     --f-display: 'Oswald', 'Arial Narrow', sans-serif;
     --f-body:    'Archivo', system-ui, sans-serif;
     --f-mono:    'JetBrains Mono', ui-monospace, monospace;
-    --f-stencil: 'Big Shoulders Stencil Display', 'Oswald', sans-serif;
 
     --max: 1240px;
 }
@@ -78,15 +77,9 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 header.site { background: var(--c-iron); color: var(--c-bone); position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--c-rule-dk); }
 header.site .container { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; gap: 18px; }
 
-/* TS-01 Stacked Stencil logo (dark variant — header + footer both sit on dark bg) */
-.brand { display: inline-flex; flex-direction: column; align-items: stretch; text-align: center; text-decoration: none; color: inherit; }
-.brand-wm { font-family: var(--f-stencil); font-weight: 900; font-size: 30px; line-height: 0.82; letter-spacing: 0.005em; text-transform: uppercase; color: var(--c-bone); }
-.brand-wm .amp { color: var(--c-rust); }
-.brand-tag { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-family: var(--f-mono); font-size: 8px; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: var(--c-bone); white-space: nowrap; }
-.brand-tag::before, .brand-tag::after { content: ""; height: 1.5px; flex: 1; background: var(--c-rust); }
-.footer-brand .brand-wm { font-size: 48px; }
-.footer-brand .brand-tag { font-size: 10px; gap: 10px; margin-top: 22px; }
-.footer-brand .brand-tag::before, .footer-brand .brand-tag::after { height: 2px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; font-family: var(--f-display); font-weight: 700; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; }
+.brand-mark { width: 36px; height: 36px; background: var(--c-rust); display: grid; place-items: center; color: var(--c-bone); font-family: var(--f-display); font-weight: 700; font-size: 18px; border: 2px solid var(--c-bone); box-shadow: 2px 2px 0 var(--c-coal); transform: rotate(-2deg); }
+.brand .amp { color: var(--c-amber); }
 
 nav.primary { display: flex; gap: 28px; }
 nav.primary a { color: var(--c-bone); text-decoration: none; font-family: var(--f-display); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 15px; opacity: 0.85; padding: 4px 0; }
