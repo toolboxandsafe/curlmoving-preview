@@ -112,6 +112,10 @@ nav.primary a:hover { opacity: 1; color: var(--c-amber); }
 .hero h1 .accent { color: var(--c-rust); display: block; }
 .hero h1 .underline { background: linear-gradient(transparent 78%, var(--c-rust) 78% 92%, transparent 92%); padding: 0 4px; }
 .hero-sub { font-size: clamp(16px, 1.6vw, 19px); line-height: 1.55; max-width: 540px; opacity: 0.9; margin-bottom: 28px; }
+.hero-quote { margin-bottom: 28px; }
+.hero-quote .stencil-label { margin-bottom: 12px; }
+.hero-quote h2 { font-size: clamp(28px, 3.4vw, 42px); line-height: 0.98; color: var(--c-bone); margin-bottom: 12px; }
+.hero-quote p { font-size: clamp(15px, 1.5vw, 18px); line-height: 1.55; max-width: 540px; opacity: 0.9; }
 .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 
 /* HERO — city variant (smaller, photo + side card) */
