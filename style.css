@@ -77,9 +77,9 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 header.site { background: var(--c-iron); color: var(--c-bone); position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--c-rule-dk); }
 header.site .container { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; gap: 18px; }
 
-.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; font-family: var(--f-display); font-weight: 700; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; }
-.brand-mark { width: 36px; height: 36px; background: var(--c-rust); display: grid; place-items: center; color: var(--c-bone); font-family: var(--f-display); font-weight: 700; font-size: 18px; border: 2px solid var(--c-bone); box-shadow: 2px 2px 0 var(--c-coal); transform: rotate(-2deg); }
-.brand .amp { color: var(--c-amber); }
+.brand { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: inherit; }
+.brand-band { background: var(--c-rust); color: var(--c-bone); font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 0.9; text-transform: uppercase; letter-spacing: 0.02em; padding: 7px 16px; transform: rotate(-2.5deg); box-shadow: 3px 3px 0 var(--c-coal); }
+.brand-tag { font-family: var(--f-mono); font-weight: 700; font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-bone); }
 
 nav.primary { display: flex; gap: 28px; }
 nav.primary a { color: var(--c-bone); text-decoration: none; font-family: var(--f-display); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 15px; opacity: 0.85; padding: 4px 0; }
