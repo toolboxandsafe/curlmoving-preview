@@ -78,7 +78,7 @@ header.site { background: var(--c-iron); color: var(--c-bone); position: sticky;
 header.site .container { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; gap: 18px; }
 
 .brand { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; color: inherit; }
-.brand-band { background: var(--c-rust); color: var(--c-bone); font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 0.9; text-transform: uppercase; letter-spacing: 0.02em; padding: 7px 16px; transform: rotate(-2.5deg); box-shadow: 3px 3px 0 var(--c-coal); }
+.brand-band { background: var(--c-rust); color: var(--c-bone); font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 0.9; text-align: left; text-transform: uppercase; letter-spacing: 0.02em; padding: 7px 16px; transform: rotate(-2.5deg); box-shadow: 3px 3px 0 var(--c-coal); }
 .brand-tag { font-family: var(--f-mono); font-weight: 700; font-size: 8.5px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-bone); }
 
 nav.primary { display: flex; gap: 28px; }
