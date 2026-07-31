@@ -111,8 +111,30 @@
 
             <div>
                 <div class="section-head compact" style="margin-bottom: 28px;">
-                    <h2><span class="num">// 02 — Form</span>Request a quote.</h2>
+                    <h2><span class="num">// 02 — Fastest way</span>Text me a photo.</h2>
                 </div>
+                <div class="callout">
+                    <strong>Text is fastest</strong>
+                    Send a photo of the item, plus the pickup and dropoff addresses. I can usually
+                    quote it in under five minutes.
+                </div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px;">
+                    <a href="sms:+16029354209" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M3 5 H21 V17 H13 L8 21 V17 H3 Z"/></svg>
+                        Text Ryan
+                    </a>
+                    <a href="tel:+16029354209" class="btn btn-dark">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 4 H9 L11 9 L8.5 10.5 C9.5 13 11 14.5 13.5 15.5 L15 13 L20 15 V19 C20 19.5 19.5 20 19 20 C11 20 4 13 4 5 C4 4.5 4.5 4 5 4 Z"/></svg>
+                        Call now
+                    </a>
+                </div>
+
+                <!-- QUOTE FORM — DISABLED until a form backend is connected.
+                     It was action="thanks.html" method="GET", which sent nothing anywhere:
+                     the browser put the answers in the URL and the static thanks page
+                     discarded them. Every submission was lost silently.
+                     To re-enable: delete this comment wrapper and point action= at a real
+                     handler (Formspree, Web3Forms, Netlify Forms) with method="POST".
                 <form action="/thanks/" method="GET" class="form">
                     <div class="form-row">
                         <label for="name">// Your name</label>
@@ -140,6 +162,7 @@
                         Send quote request
                     </button>
                 </form>
+                -->
             </div>
         </div>
     </div>
@@ -206,7 +229,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <span>© 2026 Curl Moving · All rights reserved · <a href="/privacy-policy/">Privacy Policy</a></span>
+            <span>© 2026 Curl Moving · All rights reserved · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/cookie-policy/">Cookie Policy</a></span>
             <span>Gilbert, AZ · Built tough.</span>
         </div>
     </div>

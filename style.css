@@ -184,6 +184,8 @@ nav.primary a:hover { opacity: 1; color: var(--c-amber); }
 .prose p { margin: 0 0 16px; font-size: 16.5px; }
 .prose h3 { font-size: 22px; color: var(--c-coal); margin: 28px 0 12px; letter-spacing: 0.01em; }
 .section.dark .prose h3 { color: var(--c-bone); }
+.prose h4 { font-family: var(--f-mono); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--c-rust); margin: 22px 0 8px; }
+.section.dark .prose h4 { color: var(--c-amber); }
 .prose ul { list-style: none; padding: 0; margin: 0 0 18px; border-top: 1px solid var(--c-rule); }
 .section.dark .prose ul { border-top-color: var(--c-rule-dk); }
 .prose li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--c-rule); font-size: 15.5px; }
