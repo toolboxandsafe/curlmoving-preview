@@ -88,10 +88,9 @@ nav.primary a:hover { opacity: 1; color: var(--c-amber); }
 .header-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--c-rust); color: var(--c-bone); text-decoration: none; padding: 10px 16px; font-family: var(--f-display); font-weight: 700; font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; border: 2px solid var(--c-coal); box-shadow: 3px 3px 0 var(--c-coal); transition: transform .12s, box-shadow .12s, background .15s; }
 .header-cta:hover { background: var(--c-rust-dk); transform: translate(1px,1px); box-shadow: 2px 2px 0 var(--c-coal); }
 .header-cta svg { width: 16px; height: 16px; }
-.header-contact { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
-.header-email { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--c-bone); opacity: 0.7; text-decoration: none; text-align: center; overflow-wrap: anywhere; }
-.header-email:hover { opacity: 1; color: var(--c-amber); text-decoration: underline; }
-@media (max-width: 480px) { .header-email { font-size: 9.5px; letter-spacing: 0.02em; } }
+.header-contact { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+.header-email { font-family: var(--f-mono); font-weight: 700; font-size: 8.5px; letter-spacing: 0.3em; color: var(--c-bone); opacity: 0.75; text-decoration: none; text-align: center; }
+.header-email:hover { opacity: 1; color: var(--c-amber); }
 
 /* BUTTONS */
 .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 22px; font-family: var(--f-display); font-weight: 700; font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border: 2px solid var(--c-coal); box-shadow: 4px 4px 0 var(--c-coal); transition: transform .12s, box-shadow .12s, background .15s; cursor: pointer; }
@@ -432,3 +431,26 @@ footer { background: var(--c-coal); color: var(--c-bone); padding: 64px 0 32px; 
 
 /* UTIL */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* SMALL PHONES — header must not overflow the viewport.
+   Kept last so these win the cascade over the base rules above. */
+@media (max-width: 480px) {
+    .header-email { letter-spacing: 0.04em; font-size: 8px; }
+    /* header CTA overflowed the viewport on small phones — shrink it to fit */
+    .header-cta { font-size: 13px; padding: 8px 10px; letter-spacing: 0.02em; gap: 5px; }
+    .header-cta svg { width: 13px; height: 13px; }
+    .brand-band { font-size: 18px; padding: 6px 12px; }
+    .brand-tag { font-size: 7.5px; letter-spacing: 0.18em; }
+    .menu-btn { padding: 6px 9px; font-size: 13px; }
+    header.site .container { gap: 8px; }
+}
+
+@media (max-width: 365px) {
+    header.site .container { padding-left: 12px; padding-right: 12px; gap: 6px; }
+    .brand-band { font-size: 15.5px; padding: 5px 9px; }
+    .brand-tag { font-size: 6.5px; letter-spacing: 0.1em; }
+    .header-cta { font-size: 11.5px; padding: 7px 8px; gap: 4px; }
+    .header-cta svg { width: 11px; height: 11px; }
+    .header-email { font-size: 7px; letter-spacing: 0.01em; }
+    .menu-btn { padding: 5px 7px; font-size: 11.5px; }
+}
