@@ -8,11 +8,24 @@
  * so links added later are covered automatically with no code change.
  *
  * ── TO FINISH SETUP ──────────────────────────────────────────────────────────
- * Set AW_CONVERSION_LABEL below. Find it in Google Ads:
- *   Goals > Conversions > Summary > (your call/text action) > Tag setup >
- *   "Install the tag yourself". The snippet shows send_to: 'AW-878922638/XXXX'.
- *   The part after the slash is the label.
- * Until it is set, GA4 events fire but no Google Ads conversion is recorded.
+ * As of the Phase 0 audit, the Ads account had NO website conversion action —
+ * no send_to or conversion label appeared anywhere in the old site's source.
+ * One has to be created before a label exists. Two options:
+ *
+ *   A. Import the GA4 event (no change to this file needed).
+ *      GA4 > Admin > Events > mark 'click_to_call' as a key event, confirm the
+ *      Google Ads link, then Ads > Goals > Conversions > + New conversion
+ *      action > Import > Google Analytics 4. The event must have fired at
+ *      least once and key events take ~24h to appear.
+ *
+ *   B. Create a native Ads conversion and set the label below.
+ *      Ads > Goals > Conversions > + New conversion action > Phone calls >
+ *      "Clicks on your number on your mobile website". Only after it exists
+ *      does Tag setup show send_to: 'AW-878922638/XXXXXXXX'. The part after
+ *      the slash is AW_CONVERSION_LABEL.
+ *
+ * With the label blank, GA4 events still fire; only the native Ads conversion
+ * is skipped. That is the correct behaviour for option A.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 (function () {
