@@ -405,6 +405,8 @@ footer { background: var(--c-coal); color: var(--c-bone); padding: 64px 0 32px; 
 .footer-section h4 { font-size: 14px; color: var(--c-rust); margin-bottom: 18px; letter-spacing: 0.12em; font-family: var(--f-mono); font-weight: 700; }
 .footer-section a, .footer-section p { display: block; text-decoration: none; color: var(--c-bone); opacity: 0.75; margin: 0 0 8px; font-size: 14.5px; }
 .footer-section a:hover { color: var(--c-amber); opacity: 1; }
+.footer-bottom a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--c-rule-dk); }
+.footer-bottom a:hover { color: var(--c-bone); }
 .footer-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 24px; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-steel); }
 @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
