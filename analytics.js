@@ -96,7 +96,9 @@
       cta_section: ctaSection(a),
       cta_label: (a.textContent || '').trim().slice(0, 60),
       page_path: window.location.pathname,
-      link_url: href,
+      /* sms: links carry a prefilled body, so href runs ~94 chars and GA4
+         silently drops any parameter value over 100. Log the number only. */
+      link_url: href.split('?')[0].slice(0, 100),
       transport_type: 'beacon'
     });
 
