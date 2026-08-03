@@ -111,6 +111,23 @@
       ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "Loading a Genie GS-1930 scissor lift onto the trailer",
+      "description": "Curl Moving loading a Genie GS-1930 electric scissor lift under its own power up the ramp onto a drop deck trailer in Gilbert, Arizona.",
+      "thumbnailUrl": "https://curlmoving.com/images/scissor-lift-loading-poster.jpg",
+      "contentUrl": "https://curlmoving.com/images/scissor-lift-loading.mp4",
+      "uploadDate": "2025-07-29",
+      "duration": "PT14S",
+      "width": 720,
+      "height": 1280,
+      "publisher": {
+        "@id": "https://curlmoving.com/#business"
+      }
+    }
+    </script>
 </head>
 <body>
 
@@ -173,21 +190,34 @@
     </div>
 </section>
 
-<!-- ============================================================
-     PHOTO SLOT — hero-width shot. Best pick: your lift strapped
-     down on the drop deck, shot low and wide.
-     TO FILL: delete the <div class="ph">…</div> below and paste:
-     <img src="/images/scissor-lift-hero.jpg" alt="Scissor lift strapped to the Curl Moving drop deck trailer">
-     ============================================================ -->
-<section class="section" style="padding-bottom: 0;">
+<!-- REAL JOB MEDIA — vertical clip + photo, shown at their native ratios.
+     The video autoplays muted only once it scrolls into view (see script at
+     the foot of this page) and is fully pausable via its own controls. -->
+<section class="section proof">
     <div class="container">
-        <figure class="photo-slot wide">
-            <div class="ph">
-                <svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="19"/><circle cx="12" cy="15" r="3.5"/><path d="M3 26 L13 16 L19 22 L23 18 L29 24"/></svg>
-                <span class="ph-num">// Photo 01 — Hero</span>
-                <span class="ph-note">Lift strapped on the drop deck. Shoot low and wide, landscape, 16:9.</span>
+        <div class="proof-grid">
+            <div class="proof-copy">
+                <span class="stencil-label">// On the job</span>
+                <h2>Drive on.<br>Chain down.</h2>
+                <p>A Genie GS-1930 going up the ramp under its own power, then chained at the factory tie points before it moves an inch. That's the whole job — no crane, no drama, nothing riding on the guardrails.</p>
+                <a href="sms:+16029354209?body=Hi%20Ryan,%20I%20need%20a%20scissor%20lift%20moved.%20Make/model:%20%20Pickup:%20%20Dropoff:%20" class="btn btn-dark btn-sm">Text Ryan</a>
             </div>
-        </figure>
+            <figure class="media-frame">
+                <video
+                    src="/images/scissor-lift-loading.mp4"
+                    poster="/images/scissor-lift-loading-poster.jpg"
+                    width="720" height="1280"
+                    muted loop playsinline controls preload="none"
+                    aria-label="Ryan driving a Genie GS-1930 scissor lift up the ramp onto the trailer"></video>
+                <figcaption>Drive-on loading · GS-1930</figcaption>
+            </figure>
+            <figure class="media-frame">
+                <img src="/images/scissor-lift-chained-down.jpg"
+                     width="900" height="1200" loading="lazy" decoding="async"
+                     alt="Scissor lift chained down on the trailer deck, ramp still lowered, while the chain is secured at the tie point">
+                <figcaption>Chained at the tie points</figcaption>
+            </figure>
+        </div>
     </div>
 </section>
 
@@ -243,27 +273,25 @@
             </div>
         </div>
 
-        <!-- ============================================================
-             PHOTO SLOTS — two shots that pair with the equipment list.
-             TO FILL: delete the <div class="ph">…</div> inside a figure and paste:
-             <img src="/images/scissor-lift-slab.jpg" alt="Electric slab scissor lift loaded for transport">
-             ============================================================ -->
+        <!-- MORE PHOTOS GO HERE — uncomment this block once you have a slab
+             lift and a rough-terrain shot. Replace each <div class="ph">…</div>
+             with <img src="/images/your-photo.jpg" alt="...">, or just drop the
+             <img> straight into the <figure> and delete the placeholder.
         <div class="photo-grid two-up" style="margin-top: 36px;">
             <figure class="photo-slot">
                 <div class="ph">
-                    <svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="19"/><circle cx="12" cy="15" r="3.5"/><path d="M3 26 L13 16 L19 22 L23 18 L29 24"/></svg>
-                    <span class="ph-num">// Photo 02 — Equipment</span>
+                    <span class="ph-num">// Photo — Equipment</span>
                     <span class="ph-note">Slab lift on the deck or at pickup. Landscape, 4:3.</span>
                 </div>
             </figure>
             <figure class="photo-slot">
                 <div class="ph">
-                    <svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="19"/><circle cx="12" cy="15" r="3.5"/><path d="M3 26 L13 16 L19 22 L23 18 L29 24"/></svg>
-                    <span class="ph-num">// Photo 03 — Equipment</span>
+                    <span class="ph-num">// Photo — Equipment</span>
                     <span class="ph-note">Rough terrain unit on dirt or gravel. Landscape, 4:3.</span>
                 </div>
             </figure>
         </div>
+        -->
     </div>
 </section>
 
@@ -318,40 +346,19 @@
     </div>
 </section>
 
-<!-- ============================================================
-     PHOTO SLOTS — job gallery. Add or delete <figure> blocks freely,
-     the grid reflows on its own.
-     TO FILL: delete the <div class="ph">…</div> inside a figure and paste:
-     <img src="/images/scissor-lift-loading.jpg" alt="Loading a scissor lift onto the drop deck trailer">
-     Keep the <figcaption> or delete it — either works.
-     ============================================================ -->
+<!-- JOB GALLERY — uncomment when there are more shots to show (a delivered
+     unit, a rough-terrain job, a tight-access move). Swap each
+     <div class="ph">…</div> for an <img src="/images/…" alt="…">.
 <section class="section" style="padding-top: 0;">
     <div class="container">
         <div class="section-head compact">
-            <h2><span class="num">// 04 — On the job</span>Real moves.</h2>
+            <h2><span class="num">// — On the job</span>Real moves.</h2>
             <p class="lede">Loading, strapping, delivering. Same lift on the far end, same condition it left in.</p>
         </div>
         <div class="photo-grid">
             <figure class="photo-slot">
                 <div class="ph">
-                    <svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="19"/><circle cx="12" cy="15" r="3.5"/><path d="M3 26 L13 16 L19 22 L23 18 L29 24"/></svg>
-                    <span class="ph-num">// Photo 04 — Loading</span>
-                    <span class="ph-note">Lift driving up onto the drop deck. Landscape, 4:3.</span>
-                </div>
-                <figcaption>Loading</figcaption>
-            </figure>
-            <figure class="photo-slot">
-                <div class="ph">
-                    <svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="19"/><circle cx="12" cy="15" r="3.5"/><path d="M3 26 L13 16 L19 22 L23 18 L29 24"/></svg>
-                    <span class="ph-num">// Photo 05 — Tie-down</span>
-                    <span class="ph-note">Close-up of a chain at the tie point with a chock. Landscape, 4:3.</span>
-                </div>
-                <figcaption>Chained down</figcaption>
-            </figure>
-            <figure class="photo-slot">
-                <div class="ph">
-                    <svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="19"/><circle cx="12" cy="15" r="3.5"/><path d="M3 26 L13 16 L19 22 L23 18 L29 24"/></svg>
-                    <span class="ph-num">// Photo 06 — Delivered</span>
+                    <span class="ph-num">// Photo — Delivered</span>
                     <span class="ph-note">Lift set in place at the drop site. Landscape, 4:3.</span>
                 </div>
                 <figcaption>Delivered</figcaption>
@@ -359,11 +366,12 @@
         </div>
     </div>
 </section>
+-->
 
 <section class="section dark grit">
     <div class="container">
         <div class="section-head compact">
-            <h2><span class="num">// 05 — FAQ</span>Common questions.</h2>
+            <h2><span class="num">// 04 — FAQ</span>Common questions.</h2>
             <p class="lede">If yours isn't here, text me — I answer every text personally.</p>
         </div>
         <div class="faq">
@@ -456,5 +464,26 @@
 </footer>
 
     <script src="/analytics.js" defer></script>
+    <script>
+    // The clip weighs ~5 MB, so it stays unloaded (preload="none") until it
+    // scrolls into view, then plays muted and pauses again on the way out.
+    // Anyone who asks for reduced motion just gets the poster + controls.
+    (function () {
+        var v = document.querySelector('.media-frame video');
+        if (!v || !('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                    if (v.preload === 'none') { v.preload = 'auto'; v.load(); }
+                    var p = v.play();
+                    if (p) p.catch(function () {});
+                } else if (!v.paused) {
+                    v.pause();
+                }
+            });
+        }, { threshold: 0.4 }).observe(v);
+    })();
+    </script>
 </body>
 </html>
