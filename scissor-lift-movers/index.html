@@ -169,40 +169,32 @@
     </div>
 </header>
 
-<section class="hero-inner grit">
+<section class="hero-inner grit hero-media">
     <div class="container">
-        <div class="hero-eyebrow">
-            <span class="tag">// SERVICE 04</span>
-            <span>Scissor Lift Moving · Drop Deck Trailer</span>
-        </div>
-        <h1>Scissor lifts.<br><span class="accent">Loaded, strapped, delivered.</span></h1>
-        <p class="hero-sub">Hey, I'm Ryan Kearl. Since 2020 I've been moving only the heavy stuff. Job site to job site, shop to yard, rental return, auction pickup — I load your lift on the drop deck, chain it down at the manufacturer's tie points, and set it where you need it. Send me the make and model plus both addresses and you'll have a firm quote fast.</p>
-        <div class="hero-cta-row">
-            <a href="tel:+16029354209" class="btn btn-primary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 4 H9 L11 9 L8.5 10.5 C9.5 13 11 14.5 13.5 15.5 L15 13 L20 15 V19 C20 19.5 19.5 20 19 20 C11 20 4 13 4 5 C4 4.5 4.5 4 5 4 Z"/></svg>
-                Call (602) 935-4209
-            </a>
-            <a href="sms:+16029354209?body=Hi%20Ryan,%20I%20need%20a%20scissor%20lift%20moved.%20Make/model:%20%20Pickup:%20%20Dropoff:%20" class="btn btn-ghost">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M3 5 H21 V17 H13 L8 21 V17 H3 Z"/></svg>
-                Text Ryan
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- REAL JOB MEDIA — vertical clip + photo, shown at their native ratios.
-     The video autoplays muted only once it scrolls into view (see script at
-     the foot of this page) and is fully pausable via its own controls. -->
-<section class="section proof">
-    <div class="container">
-        <div class="proof-grid">
-            <div class="proof-copy">
-                <span class="stencil-label">// On the job</span>
-                <h2>Drive on.<br>Chain down.</h2>
-                <p>A Genie GS-1930 going up the ramp under its own power, then chained at the factory tie points before it moves an inch. That's the whole job — no crane, no drama, nothing riding on the guardrails.</p>
-                <a href="sms:+16029354209?body=Hi%20Ryan,%20I%20need%20a%20scissor%20lift%20moved.%20Make/model:%20%20Pickup:%20%20Dropoff:%20" class="btn btn-dark btn-sm">Text Ryan</a>
+        <div class="hero-media-grid">
+            <div class="hero-media-copy">
+                <div class="hero-eyebrow">
+                    <span class="tag">// SERVICE 04</span>
+                    <span>Scissor Lift Moving · Drop Deck Trailer</span>
+                </div>
+                <h1>Scissor lifts.<br><span class="accent">Loaded, strapped, delivered.</span></h1>
+                <p class="hero-sub">Hey, I'm Ryan Kearl. Since 2020 I've been moving only the heavy stuff. Job site to job site, shop to yard, rental return, auction pickup — I load your lift on the drop deck, chain it down at the manufacturer's tie points, and set it where you need it. Send me the make and model plus both addresses and you'll have a firm quote fast.</p>
+                <div class="hero-cta-row">
+                    <a href="tel:+16029354209" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M5 4 H9 L11 9 L8.5 10.5 C9.5 13 11 14.5 13.5 15.5 L15 13 L20 15 V19 C20 19.5 19.5 20 19 20 C11 20 4 13 4 5 C4 4.5 4.5 4 5 4 Z"/></svg>
+                        Call (602) 935-4209
+                    </a>
+                    <a href="sms:+16029354209?body=Hi%20Ryan,%20I%20need%20a%20scissor%20lift%20moved.%20Make/model:%20%20Pickup:%20%20Dropoff:%20" class="btn btn-ghost">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M3 5 H21 V17 H13 L8 21 V17 H3 Z"/></svg>
+                        Text Ryan
+                    </a>
+                </div>
             </div>
-            <figure class="media-frame">
+            <!-- Hero clip. The source is a 9:16 phone video, so it sits in a
+                 dedicated panel at its own ratio rather than being cropped into
+                 a wide background band. aspect-ratio on the panel reserves the
+                 space before the file loads, so there is no layout shift. -->
+            <figure class="hero-clip">
                 <video
                     src="/images/scissor-lift-loading.mp4"
                     poster="/images/scissor-lift-loading-poster.jpg"
@@ -210,12 +202,6 @@
                     muted loop playsinline controls preload="none"
                     aria-label="Ryan driving a Genie GS-1930 scissor lift up the ramp onto the trailer"></video>
                 <figcaption>Drive-on loading · GS-1930</figcaption>
-            </figure>
-            <figure class="media-frame">
-                <img src="/images/scissor-lift-chained-down.jpg"
-                     width="900" height="1200" loading="lazy" decoding="async"
-                     alt="Scissor lift chained down on the trailer deck, ramp still lowered, while the chain is secured at the tie point">
-                <figcaption>Chained at the tie points</figcaption>
             </figure>
         </div>
     </div>
@@ -227,19 +213,29 @@
             <h2><span class="num">// 01 — Method</span>How I move<br>your lift.</h2>
             <p class="lede">Right trailer, right tie-down, right route. Platform stowed, wheels chocked, nothing shifting on the freeway.</p>
         </div>
-        <div class="prose">
-            <ul>
-                <li><strong>Drive-on loading —</strong> The drop deck sits low, so the lift rolls on under its own power when it runs. No crane, no drama.</li>
-                <li><strong>Dead unit? I winch it —</strong> Flat battery, blown hydraulic, seized wheel motor — tell me up front and I bring the gear to pull it on.</li>
-                <li><strong>Chained at the tie points —</strong> Four-point tie-down at the manufacturer's designated points, plus wheel chocks. Nothing rides on the guardrails.</li>
-                <li><strong>Platform down and stowed —</strong> Deck lowered, rails folded or pinned per the model, potholes protection retracted before we roll.</li>
-                <li><strong>Route planned for height and weight —</strong> Loaded deck height, gate widths, and low branches get checked before move day, not at the gate.</li>
-                <li><strong>Fully insured —</strong> Your lift is covered from the moment it touches my deck.</li>
-            </ul>
-            <div class="callout">
-                <strong>Before I arrive</strong>
-                Have the keys on site and the unit charged or fueled enough to drive on and off. Lower the platform and retract the outriggers if it has them. Know the make, model, and weight — it's on the data plate near the controls. Clear a straight approach on firm ground, and flag any soft dirt, gravel, tight gates, or overhead wires so I bring the right setup.
+        <div class="method-grid">
+            <div class="prose">
+                <ul>
+                    <li><strong>Drive-on loading —</strong> The drop deck sits low, so the lift rolls on under its own power when it runs. No crane, no drama.</li>
+                    <li><strong>Dead unit? I winch it —</strong> Flat battery, blown hydraulic, seized wheel motor — tell me up front and I bring the gear to pull it on.</li>
+                    <li><strong>Chained at the tie points —</strong> Four-point tie-down at the manufacturer's designated points, plus wheel chocks. Nothing rides on the guardrails.</li>
+                    <li><strong>Platform down and stowed —</strong> Deck lowered, rails folded or pinned per the model, potholes protection retracted before we roll.</li>
+                    <li><strong>Route planned for height and weight —</strong> Loaded deck height, gate widths, and low branches get checked before move day, not at the gate.</li>
+                    <li><strong>Fully insured —</strong> Your lift is covered from the moment it touches my deck.</li>
+                </ul>
+                <div class="callout">
+                    <strong>Before I arrive</strong>
+                    Have the keys on site and the unit charged or fueled enough to drive on and off. Lower the platform and retract the outriggers if it has them. Know the make, model, and weight — it's on the data plate near the controls. Clear a straight approach on firm ground, and flag any soft dirt, gravel, tight gates, or overhead wires so I bring the right setup.
+                </div>
             </div>
+            <!-- Sticky so the tie-down photo stays beside the bullet it proves
+                 while the list scrolls past. -->
+            <figure class="media-figure sticky">
+                <img src="/images/scissor-lift-chained-down.jpg"
+                     width="1200" height="900" loading="lazy" decoding="async"
+                     alt="Chain running from the scissor lift's factory tie point down to the trailer deck, secured by hand with the loading ramp still lowered">
+                <figcaption>Chained at the tie points</figcaption>
+            </figure>
         </div>
     </div>
 </section>
@@ -252,46 +248,86 @@
         </div>
         <div class="tile-grid" style="background: var(--c-coal); border-color: var(--c-rule-dk);">
             <div class="tile" style="background: var(--c-coal); color: var(--c-bone); border-color: var(--c-rule-dk);">
+                <figure class="tile-shot">
+                    <div class="ph">
+                        <span class="ph-num">// Photo — Slab</span>
+                        <span class="ph-note">Slab lift on the deck. Landscape, 4:3.</span>
+                    </div>
+                    <!-- SWAP IN: <img src="/images/scissor-lift-electric-slab.jpg" width="1200" height="900"
+                         loading="lazy" decoding="async" alt="Electric slab scissor lift on solid tires, loaded on the trailer deck"> -->
+                </figure>
                 <div class="icon"><svg viewBox="0 0 32 32"><rect x="5" y="23" width="22" height="5"/><path d="M8 23 L16 15 L24 23"/><path d="M8 15 L24 15"/><rect x="9" y="4" width="14" height="8"/></svg></div>
                 <h4 style="color: var(--c-bone);">Electric slab lifts</h4>
                 <p style="color: var(--c-bone); opacity: 0.8;">Indoor and warehouse units on solid tires.</p>
             </div>
             <div class="tile" style="background: var(--c-coal); color: var(--c-bone); border-color: var(--c-rule-dk);">
+                <figure class="tile-shot">
+                    <div class="ph">
+                        <span class="ph-num">// Photo — Rough terrain</span>
+                        <span class="ph-note">RT unit on dirt or gravel. Landscape, 4:3.</span>
+                    </div>
+                    <!-- SWAP IN: <img src="/images/scissor-lift-rough-terrain.jpg" width="1200" height="900"
+                         loading="lazy" decoding="async" alt="Rough terrain 4WD scissor lift on lugged tires standing on dirt at a job site"> -->
+                </figure>
                 <div class="icon"><svg viewBox="0 0 32 32"><circle cx="9" cy="24" r="4"/><circle cx="23" cy="24" r="4"/><path d="M5 18 L27 18"/><path d="M9 18 L16 10 L23 18"/><rect x="11" y="3" width="10" height="6"/></svg></div>
                 <h4 style="color: var(--c-bone);">Rough terrain / 4WD</h4>
                 <p style="color: var(--c-bone); opacity: 0.8;">Heavier job site units on lugged tires.</p>
             </div>
             <div class="tile" style="background: var(--c-coal); color: var(--c-bone); border-color: var(--c-rule-dk);">
+                <figure class="tile-shot">
+                    <div class="ph">
+                        <span class="ph-num">// Photo — Narrow</span>
+                        <span class="ph-note">Narrow unit in a doorway. Landscape, 4:3.</span>
+                    </div>
+                    <!-- SWAP IN: <img src="/images/scissor-lift-narrow-profile.jpg" width="1200" height="900"
+                         loading="lazy" decoding="async" alt="Narrow low-profile scissor lift positioned in a doorway to show it fits interior access"> -->
+                </figure>
                 <div class="icon"><svg viewBox="0 0 32 32"><rect x="11" y="20" width="10" height="8"/><path d="M13 20 L16 14 L19 20"/><path d="M13 14 L19 14"/><rect x="12" y="4" width="8" height="7"/></svg></div>
                 <h4 style="color: var(--c-bone);">Narrow &amp; low-profile</h4>
                 <p style="color: var(--c-bone); opacity: 0.8;">Door-width units for interior work.</p>
             </div>
             <div class="tile" style="background: var(--c-coal); color: var(--c-bone); border-color: var(--c-rule-dk);">
+                <figure class="tile-shot">
+                    <div class="ph">
+                        <span class="ph-num">// Photo — Towable</span>
+                        <span class="ph-note">Towable unit hitched up. Landscape, 4:3.</span>
+                    </div>
+                    <!-- SWAP IN: <img src="/images/scissor-lift-towable.jpg" width="1200" height="900"
+                         loading="lazy" decoding="async" alt="Towable trailer-mounted one-man lift hitched and ready to move"> -->
+                </figure>
                 <div class="icon"><svg viewBox="0 0 32 32"><path d="M4 22 L28 22"/><circle cx="20" cy="26" r="3"/><path d="M4 22 L4 18 L10 18"/><path d="M12 22 L16 14 L22 22"/><rect x="14" y="4" width="8" height="7"/></svg></div>
                 <h4 style="color: var(--c-bone);">Towable &amp; one-man lifts</h4>
                 <p style="color: var(--c-bone); opacity: 0.8;">Trailer-mount and push-around units.</p>
             </div>
         </div>
 
-        <!-- MORE PHOTOS GO HERE — uncomment this block once you have a slab
-             lift and a rough-terrain shot. Replace each <div class="ph">…</div>
-             with <img src="/images/your-photo.jpg" alt="...">, or just drop the
-             <img> straight into the <figure> and delete the placeholder.
-        <div class="photo-grid two-up" style="margin-top: 36px;">
-            <figure class="photo-slot">
-                <div class="ph">
-                    <span class="ph-num">// Photo — Equipment</span>
-                    <span class="ph-note">Slab lift on the deck or at pickup. Landscape, 4:3.</span>
-                </div>
-            </figure>
-            <figure class="photo-slot">
-                <div class="ph">
-                    <span class="ph-num">// Photo — Equipment</span>
-                    <span class="ph-note">Rough terrain unit on dirt or gravel. Landscape, 4:3.</span>
-                </div>
-            </figure>
+    </div>
+</section>
+
+<!-- ON THE JOB — one wide editorial frame, one subject. Sits between the two
+     text-heavy sections on purpose, to break the vertical rhythm. -->
+<section class="section jobband">
+    <div class="container">
+        <div class="jobband-head">
+            <div>
+                <span class="stencil-label">// On the job</span>
+                <h2>Drive on.<br>Chain down.</h2>
+            </div>
+            <div class="jobband-lede">
+                <p>A Genie GS-1930 going up the ramp under its own power, then chained at the factory tie points before it moves an inch. That's the whole job — no crane, no drama, nothing riding on the guardrails.</p>
+                <a href="sms:+16029354209?body=Hi%20Ryan,%20I%20need%20a%20scissor%20lift%20moved.%20Make/model:%20%20Pickup:%20%20Dropoff:%20" class="btn btn-dark btn-sm">Text Ryan</a>
+            </div>
         </div>
-        -->
+        <figure class="media-figure wide">
+            <div class="ph">
+                <span class="ph-num">// Photo — Hero band</span>
+                <span class="ph-note">Loaded lift strapped on the deck, shot low and wide from the rear quarter. Landscape, 16:9.</span>
+            </div>
+            <!-- SWAP IN: <img src="/images/scissor-lift-loaded-wide.jpg" width="1600" height="900"
+                 loading="lazy" decoding="async"
+                 alt="Scissor lift chained down on the drop deck trailer, ready to roll"> -->
+            <figcaption>Loaded and ready to roll</figcaption>
+        </figure>
     </div>
 </section>
 
@@ -345,28 +381,6 @@
         </div>
     </div>
 </section>
-
-<!-- JOB GALLERY — uncomment when there are more shots to show (a delivered
-     unit, a rough-terrain job, a tight-access move). Swap each
-     <div class="ph">…</div> for an <img src="/images/…" alt="…">.
-<section class="section" style="padding-top: 0;">
-    <div class="container">
-        <div class="section-head compact">
-            <h2><span class="num">// — On the job</span>Real moves.</h2>
-            <p class="lede">Loading, strapping, delivering. Same lift on the far end, same condition it left in.</p>
-        </div>
-        <div class="photo-grid">
-            <figure class="photo-slot">
-                <div class="ph">
-                    <span class="ph-num">// Photo — Delivered</span>
-                    <span class="ph-note">Lift set in place at the drop site. Landscape, 4:3.</span>
-                </div>
-                <figcaption>Delivered</figcaption>
-            </figure>
-        </div>
-    </div>
-</section>
--->
 
 <section class="section dark grit">
     <div class="container">
@@ -469,7 +483,7 @@
     // scrolls into view, then plays muted and pauses again on the way out.
     // Anyone who asks for reduced motion just gets the poster + controls.
     (function () {
-        var v = document.querySelector('.media-frame video');
+        var v = document.querySelector('.hero-clip video');
         if (!v || !('IntersectionObserver' in window)) return;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         new IntersectionObserver(function (entries) {
