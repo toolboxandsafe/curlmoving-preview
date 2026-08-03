@@ -374,8 +374,9 @@ nav.primary a:hover { opacity: 1; color: var(--c-amber); }
 .tile-shot > img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* ON THE JOB BAND */
-.section.jobband { background: var(--c-paper); border-top: 1px solid var(--c-rule); }
+.section.jobband { background: var(--c-paper); border-top: 1px solid var(--c-rule); padding: 66px 0 62px; }
 .jobband-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end; margin-bottom: 32px; }
+.jobband-head:last-child { margin-bottom: 0; }   /* no figure under it yet */
 .jobband-head h2 { font-size: clamp(32px, 4.2vw, 52px); line-height: 0.95; color: var(--c-coal); margin-top: 14px; }
 .jobband-lede p { font-size: 16.5px; line-height: 1.6; color: var(--c-iron); opacity: 0.9; margin-bottom: 20px; }
 @media (max-width: 760px) { .jobband-head { grid-template-columns: 1fr; gap: 18px; } }
