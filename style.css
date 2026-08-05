@@ -445,9 +445,20 @@ nav.primary a:hover { opacity: 1; color: var(--c-amber); }
 .form-row input, .form-row select, .form-row textarea { font-family: var(--f-body); font-size: 16px; padding: 14px 16px; background: var(--c-bone); border: 2px solid var(--c-coal); color: var(--c-iron); transition: border-color .15s, box-shadow .15s; }
 .form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--c-rust); box-shadow: 4px 4px 0 var(--c-rust); }
 .form-row textarea { min-height: 140px; resize: vertical; font-family: var(--f-body); }
+/* Marks the address fields as optional without shouting — same mono label, but
+   dropped to the muted ink and un-bolded so it reads as an aside. */
+.form-row label .opt { color: var(--c-iron); opacity: .55; font-weight: 400; letter-spacing: 0.12em; }
+/* Turnstile renders a fixed 300x65 iframe. Cap it so it can never widen the
+   form past its container on a narrow phone. */
+.cf-turnstile { max-width: 100%; overflow: hidden; }
+.cf-turnstile:empty { display: none; }
 button.btn { font: inherit; cursor: pointer; }
 
 /* CONTACT INFO TILES */
+/* Was an inline 2-column grid with no breakpoint, which squeezed the quote
+   form to ~156px on a phone. Collapses to one column now. */
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 56px; align-items: start; }
+@media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
 .contact-tiles { display: flex; flex-direction: column; gap: 18px; max-width: 460px; }
 .contact-tile { background: var(--c-paper); border: 2px solid var(--c-coal); box-shadow: 4px 4px 0 var(--c-coal); padding: 20px 24px; }
 .contact-tile h3 { font-size: 16px; font-family: var(--f-mono); font-weight: 700; letter-spacing: 0.18em; color: var(--c-rust); margin-bottom: 8px; text-transform: uppercase; }

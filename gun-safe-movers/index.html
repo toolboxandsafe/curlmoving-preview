@@ -313,6 +313,71 @@
     </div>
 </section>
 
+<section class="section" id="quote">
+    <div class="container">
+        <div class="section-head compact">
+            <h2><span class="num">// 05 — Quote</span>Request a quote.</h2>
+            <p class="lede">Texting is still fastest, but if you'd rather type it out, this comes straight to me. I answer every one personally.</p>
+        </div>
+        <!-- Submissions POST to /api/quote — a Cloudflare Worker on this same
+             domain (source in /_worker). It emails Ryan, hands the lead straight
+             to the intake automation, and redirects to /thanks/. No third-party
+             form service sees any of it. -->
+        <form action="/api/quote" method="POST" class="form">
+            <input type="hidden" name="page" value="gun-safe">
+            <!-- Honeypot: bots fill this in, people never see it. -->
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display: none;">
+
+            <div class="form-row">
+                <label for="q-name">// Your name</label>
+                <input type="text" id="q-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="form-row">
+                <label for="q-phone">// Phone number</label>
+                <input type="tel" id="q-phone" name="phone" autocomplete="tel" inputmode="tel" required>
+            </div>
+            <div class="form-row">
+                <label for="q-email">// Email</label>
+                <input type="email" id="q-email" name="email" autocomplete="email">
+            </div>
+            <div class="form-row">
+                <label for="q-service">// What are we moving?</label>
+                <select id="q-service" name="service">
+                        <option value="gun-safe" selected>Gun Safe</option>
+                        <option value="tool-box">Tool Box</option>
+                        <option value="vending-machine">Vending Machine</option>
+                        <option value="scissor-lift">Scissor Lift</option>
+                        <option value="other">Other Heavy Item</option>
+                </select>
+            </div>
+            <!-- Optional on purpose. Ryan gets the exact street address by phone
+                 when he calls back; nothing here is required to start a quote. -->
+            <div class="form-row">
+                <label for="q-pickup">// Where is it now? <span class="opt">optional</span></label>
+                <input type="text" id="q-pickup" name="pickup" placeholder="City, zip, or cross streets">
+            </div>
+            <div class="form-row">
+                <label for="q-dropoff">// Where is it going? <span class="opt">optional</span></label>
+                <input type="text" id="q-dropoff" name="dropoff" placeholder="City, zip, or cross streets">
+            </div>
+            <div class="form-row">
+                <label for="q-details">// Details</label>
+                <textarea id="q-details" name="message" placeholder="Weight or a photo · stairs, turns, doorways, gates · ground conditions"></textarea>
+            </div>
+            <!-- Spam check. The site key is public by design. If it is wrong or
+                 missing the widget simply yields no token, and the Worker still
+                 accepts the lead (flagged [UNVERIFIED]) rather than dropping it —
+                 unlike the old Web3Forms key, a bad value here costs no leads. -->
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEHZC8OwWLPiJlV3"></div>
+            <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+            <button type="submit" class="btn btn-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M3 12 H21 M14 5 L21 12 L14 19"/></svg>
+                Send quote request
+            </button>
+        </form>
+    </div>
+</section>
+
 <section class="cta grit">
     <div class="container">
         <span class="stencil-label on-dark" style="margin-bottom: 18px;">// Ready when you are</span>

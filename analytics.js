@@ -1,11 +1,12 @@
-/* Curl Moving — click-to-call / click-to-text conversion tracking
+/* Curl Moving — click-to-call / click-to-text / quote-form conversion tracking
  *
- * Every conversion on this site is a tel: or sms: link click; there is no
- * working contact form. Without this file, Google Ads reports zero conversions
- * while the phone is ringing.
+ * Conversions on this site are tel: and sms: link clicks plus quote-form
+ * submissions. Without this file, Google Ads reports zero conversions while the
+ * phone is ringing.
  *
- * Fires on every tel:/sms: link, on every page, via one delegated listener —
- * so links added later are covered automatically with no code change.
+ * Fires on every tel:/sms: link and every quote form, on every page, via
+ * delegated listeners — so links and forms added later are covered
+ * automatically with no code change.
  *
  * ── TO FINISH SETUP ──────────────────────────────────────────────────────────
  * As of the Phase 0 audit, the Ads account had NO website conversion action —
@@ -109,4 +110,32 @@
       });
     }
   }, true); // capture phase: run before the browser hands off to the dialer
+
+  /* Quote form submissions. The form does a native POST and Web3Forms then
+     redirects to /thanks/, so the page is torn down moments after submit —
+     same constraint as the tel:/sms: links above, and the same fix:
+     transport_type 'beacon' hands the hit to the browser to deliver
+     independently of this document. Never block submit on a callback. */
+  document.addEventListener('submit', function (e) {
+    var f = e.target;
+    if (!f || f.tagName !== 'FORM') return;
+    if (!f.classList.contains('form')) return;
+    if (typeof window.gtag !== 'function') return;
+
+    var svc = f.querySelector('[name="service"]');
+
+    window.gtag('event', 'generate_lead', {
+      cta_section: ctaSection(f),
+      form_service: svc ? svc.value : '',
+      page_path: window.location.pathname,
+      transport_type: 'beacon'
+    });
+
+    if (AW_CONVERSION_LABEL) {
+      window.gtag('event', 'conversion', {
+        send_to: AW_ID + '/' + AW_CONVERSION_LABEL,
+        transport_type: 'beacon'
+      });
+    }
+  }, true);
 })();

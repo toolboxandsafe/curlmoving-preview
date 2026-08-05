@@ -1,0 +1,44 @@
+# Cloudflare Worker — quote-form intake for curlmoving.com
+#
+# The leading underscore on this directory is deliberate: the site is served by
+# GitHub Pages, which runs default Jekyll (there is no .nojekyll and no
+# _config.yml in the repo root). Jekyll excludes _-prefixed directories from the
+# published output, so this source stays in version control but is never
+# reachable at curlmoving.com/_worker/...
+#
+# Deploy:  wrangler deploy
+# No build step, no npm dependencies — see src/index.js.
+
+name = "curl-quote-intake"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# Nothing should be reachable at <name>.workers.dev — the only entry point is
+# the route below, on the real domain.
+workers_dev = false
+
+# Intercepts before the request reaches GitHub Pages, so /api/quote does not
+# need to exist in the repo.
+routes = [
+  { pattern = "curlmoving.com/api/quote", zone_name = "curlmoving.com" }
+]
+
+# Cloudflare Email Routing. `destination_address` must be verified in the
+# Cloudflare dashboard (Email → Email Routing → Destination addresses) before
+# the binding will send anything.
+send_email = [
+  { name = "SEND_EMAIL", destination_address = "ryan@curlvending.com" }
+]
+
+[vars]
+MAIL_FROM = "quotes@curlmoving.com"
+MAIL_FROM_NAME = "Curl Moving quote form"
+MAIL_TO = "ryan@curlvending.com"
+THANKS_URL = "https://curlmoving.com/thanks/"
+CONTACT_PHONE = "(602) 935-4209"
+CONTACT_PHONE_E164 = "+16029354209"
+
+# Secrets — set with `wrangler secret put <NAME>`, never committed:
+#   TURNSTILE_SECRET    Turnstile secret key (widget: Cloudflare dash → Turnstile)
+#   APPS_SCRIPT_URL     the /exec URL of the curl-lead-intake Web App deployment
+#   APPS_SCRIPT_TOKEN   shared secret, must equal CONFIG.SCRIPT_TOKEN in Code.gs
