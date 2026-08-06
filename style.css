@@ -479,7 +479,13 @@ button.btn { font: inherit; cursor: pointer; }
 /* FOOTER */
 footer { background: var(--c-coal); color: var(--c-bone); padding: 64px 0 32px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; border-bottom: 1px solid var(--c-rule-dk); padding-bottom: 40px; }
-.footer-brand .brand { color: var(--c-bone); margin-bottom: 18px; }
+/* `.footer-section a` below sets display:block and opacity:.75, and at (0,1,1)
+   it outranks `.brand` at (0,1,0) — which stopped the brand being a flex
+   container, so its two spans fell back to inline. The band then split into two
+   staggered rust fragments with "Curl" clipped, and the tagline sat beside it
+   instead of under it. This selector is (0,2,0) so it wins; keep it above that
+   rule's reach rather than relying on source order. */
+.footer-brand .brand { display: inline-flex; opacity: 1; color: var(--c-bone); margin-bottom: 18px; }
 .footer-brand p { font-size: 14.5px; opacity: 0.75; max-width: 320px; margin-bottom: 16px; }
 .footer-brand .addr { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-amber); font-weight: 700; }
 .footer-section h4 { font-size: 14px; color: var(--c-rust); margin-bottom: 18px; letter-spacing: 0.12em; font-family: var(--f-mono); font-weight: 700; }

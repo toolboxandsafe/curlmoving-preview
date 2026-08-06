@@ -32,7 +32,9 @@ send_email = [
 
 [vars]
 MAIL_FROM = "quotes@curlmoving.com"
-MAIL_FROM_NAME = "Curl Moving quote form"
+# Keep this short. Mail clients truncate the sender display name around 20
+# characters — "Curl Moving quote form" showed up as "Curl Moving quote f."
+MAIL_FROM_NAME = "Curl Moving"
 MAIL_TO = "ryan@curlvending.com"
 THANKS_URL = "https://curlmoving.com/thanks/"
 CONTACT_PHONE = "(602) 935-4209"
