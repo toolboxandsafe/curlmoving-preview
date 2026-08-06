@@ -25,10 +25,25 @@
 
 import { EmailMessage } from 'cloudflare:email';
 
-/* Flip to true to reject submissions that fail Turnstile instead of letting
-   them through tagged [UNVERIFIED]. Left false deliberately: a real customer
-   with JS blocked is worth more than the spam a filterable prefix admits. */
-const REJECT_ON_TURNSTILE_FAIL = false;
+/* Reject submissions that fail Turnstile.
+   Started false — a real customer with JS blocked seemed worth more than the
+   spam a filterable [UNVERIFIED] prefix admits. Flipped 2026-08-05 after Russian
+   link-spam POSTed straight to this endpoint within hours of launch, skipping
+   the form (and therefore the honeypot) entirely. The deciding factor was not
+   the junk Trello card but the next case: spam carrying a plausible 10-digit US
+   number would pass normalizePhone_ and make the intake script send three texts
+   to a stranger from the business line. */
+const REJECT_ON_TURNSTILE_FAIL = true;
+
+/* Only these countries may submit. The business serves the Phoenix metro, and
+   Ryan works from Honduras — nobody else has a legitimate reason to post here.
+   ISO 3166-1 alpha-2, from Cloudflare's request.cf.country. */
+const ALLOWED_COUNTRIES = ['US', 'HN'];
+
+/* Rate limiting lives in a WAF rule on the zone, not here — see the note in
+   wrangler.toml for why the experimental Workers binding was abandoned. The
+   guarded RATE_LIMITER block below is inert without a binding and left in place
+   only so a future stable binding can be dropped in. */
 
 /* Form `service` value → human label used in the subject and email body.
    Keys must stay in sync with the <select name="service"> options on the site
@@ -48,6 +63,33 @@ export default {
     if (url.pathname !== '/api/quote') return new Response('Not found', { status: 404 });
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405, headers: { Allow: 'POST' } });
+    }
+
+    /* Rate limit first — cheapest check, and it runs before we parse a body or
+       call out to Turnstile. Keyed on IP. If the binding is missing (local dev)
+       this is skipped rather than failing closed. */
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    if (env.RATE_LIMITER) {
+      try {
+        const { success } = await env.RATE_LIMITER.limit({ key: ip });
+        if (!success) {
+          console.error('rate limited');
+          return new Response('Too many requests', {
+            status: 429, headers: { 'Retry-After': '60' },
+          });
+        }
+      } catch (err) {
+        // Never let a rate-limiter fault block a real lead.
+        console.error('rate limiter error: ' + String(err && err.message || err).slice(0, 120));
+      }
+    }
+
+    /* Geo gate. request.cf is absent under `wrangler dev` and in unit tests, so
+       treat a missing country as allowed rather than locking out development. */
+    const country = request.cf && request.cf.country;
+    if (country && ALLOWED_COUNTRIES.indexOf(country) === -1) {
+      console.error(`blocked country=${country}`);
+      return htmlResponse(outsideAreaPage(env), 403);
     }
 
     let form;
@@ -87,7 +129,9 @@ export default {
     /* Turnstile. Soft-fail by default — see REJECT_ON_TURNSTILE_FAIL. */
     const verified = await verifyTurnstile(env, form.get('cf-turnstile-response'), request);
     if (!verified && REJECT_ON_TURNSTILE_FAIL) {
-      return htmlResponse(problemPage(env, 'That submission could not be verified. Please try again.'), 400);
+      console.error(`turnstile rejected page=${lead.page}`);
+      return htmlResponse(problemPage(env,
+        'That submission could not be verified. If you have JavaScript disabled, please text or call instead — it is faster anyway.'), 400);
     }
     lead.verified = verified;
 
@@ -316,6 +360,19 @@ function shell(title, inner) {
   a.plain{color:#c0451a}
   pre{white-space:pre-wrap;word-break:break-word;background:#f2ece2;border:1px solid #cfc4b4;padding:12px;font-size:13px}
 </style></head><body><div class="box">${inner}</div></body></html>`;
+}
+
+/* Shown when the submission comes from outside the served countries. Kept
+   polite and with the phone number visible, because the rare false positive is
+   a real person on a VPN or travelling. */
+function outsideAreaPage(env) {
+  return shell('Outside our service area', `
+    <h1>We only move in Arizona</h1>
+    <p>This form is limited to the Phoenix metro area. If you are genuinely
+       trying to book a move here and reached this page by mistake — a VPN will
+       do it — call or text and I will sort it out directly.</p>
+    <a class="btn" href="sms:${esc(env.CONTACT_PHONE_E164)}">Text ${esc(env.CONTACT_PHONE)}</a>
+    <a class="btn" href="tel:${esc(env.CONTACT_PHONE_E164)}">Call</a>`);
 }
 
 function problemPage(env, msg) {

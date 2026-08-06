@@ -30,6 +30,22 @@ send_email = [
   { name = "SEND_EMAIL", destination_address = "ryan@curlvending.com" }
 ]
 
+# NO RATE LIMIT BINDING HERE — deliberately.
+#
+# The experimental [[unsafe.bindings]] ratelimit type was tried on 2026-08-05.
+# The binding materialised and limit() did not throw, but returned
+# {"success":true} on every call including well past the configured limit, i.e.
+# it never enforced. Leaving it in place would have looked like protection
+# while providing none.
+#
+# Rate limiting is instead a WAF rule on the zone:
+#   Security → WAF → Rate limiting rules → expression (http.request.uri.path
+#   eq "/api/quote" and http.request.method eq "POST"), 5 requests / 1 minute
+#   per IP, action Block.
+# That runs before the Worker and is a supported product feature.
+# src/index.js still has the guarded RATE_LIMITER block; it is inert without a
+# binding and will start working if Cloudflare ships a stable one.
+
 [vars]
 MAIL_FROM = "quotes@curlmoving.com"
 # Keep this short. Mail clients truncate the sender display name around 20
