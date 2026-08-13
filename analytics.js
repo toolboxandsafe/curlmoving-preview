@@ -8,32 +8,48 @@
  * delegated listeners — so links and forms added later are covered
  * automatically with no code change.
  *
+ * ── ADS ACCOUNT: READ THIS BEFORE CHANGING AW_ID ─────────────────────────────
+ * Until 2026-08-13 this site was tagged AW-878922638, inherited from the
+ * WordPress build (see the archive, and commit 07b5cf9). That account has no
+ * campaigns and never had a conversion action — grep the old site's source and
+ * no send_to appears anywhere. So every conversion signal the site ever sent
+ * went to an account that buys no ads.
+ *
+ * The account actually running campaigns is AW-11500888387. AW_ID and the
+ * gtag('config', …) line on all 18 pages were repointed to it on 2026-08-13.
+ * An Ads account has exactly one conversion ID, so a mismatch between AW_ID
+ * and a pasted label is silent — the hit is accepted and attributed to
+ * nothing. If conversions ever read zero while GA4 shows events, compare
+ * AW_ID against the send_to in the Ads Tag setup panel first.
+ *
  * ── TO FINISH SETUP ──────────────────────────────────────────────────────────
- * As of the Phase 0 audit, the Ads account had NO website conversion action —
- * no send_to or conversion label appeared anywhere in the old site's source.
- * One has to be created before a label exists. Two options:
+ * Two conversion actions, because calls and form leads must stay separable in
+ * Ads: they are worth different amounts and are optimised for differently.
  *
- *   A. Import the GA4 event (no change to this file needed).
- *      GA4 > Admin > Events > mark 'click_to_call' as a key event, confirm the
- *      Google Ads link, then Ads > Goals > Conversions > + New conversion
- *      action > Import > Google Analytics 4. The event must have fired at
- *      least once and key events take ~24h to appear.
+ *   Ads > Goals > Conversions > + New conversion action > Website. The flow is
+ *   one action at a time, and "manual" is required — automatic detection
+ *   issues no label and would double-count events this file already fires.
  *
- *   B. Create a native Ads conversion and set the label below.
- *      Ads > Goals > Conversions > + New conversion action > Phone calls >
- *      "Clicks on your number on your mobile website". Only after it exists
- *      does Tag setup show send_to: 'AW-878922638/XXXXXXXX'. The part after
- *      the slash is AW_CONVERSION_LABEL.
+ *     1. "Curl Moving — Call/Text Click"  -> AW_LABEL_CALL   (category Contact)
+ *     2. "Curl Moving — Quote Form"       -> AW_LABEL_LEAD   (Submit lead form)
  *
- * With the label blank, GA4 events still fire; only the native Ads conversion
- * is skipped. That is the correct behaviour for option A.
+ *   The label is the part after the slash in the event snippet's
+ *   send_to: 'AW-11500888387/XXXXXXXX'.
+ *
+ * With a label blank, that GA4 event still fires; only the native Ads
+ * conversion is skipped. So a half-finished setup degrades quietly.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 (function () {
   'use strict';
 
-  var AW_ID = 'AW-878922638';
-  var AW_CONVERSION_LABEL = ''; // <-- paste the label here, e.g. 'AbC-D_efGh1iJkLmNoP'
+  var AW_ID = 'AW-11500888387';
+
+  /* Two labels, deliberately. A single shared label would report every tel:/sms:
+     click as a quote-form conversion and vice versa, making the two
+     indistinguishable in Ads and unusable for bidding. */
+  var AW_LABEL_CALL = 'woZzCOGwpuEcEMPChuwq'; // tel: and sms: clicks
+  var AW_LABEL_LEAD = '5bwNCN6wpuEcEMPChuwq'; // quote-form submissions
 
   var GENERIC = ['section', 'grit', 'dark', 'container', 'wrap', 'inner'];
 
@@ -103,19 +119,24 @@
       transport_type: 'beacon'
     });
 
-    if (AW_CONVERSION_LABEL) {
+    if (AW_LABEL_CALL) {
       window.gtag('event', 'conversion', {
-        send_to: AW_ID + '/' + AW_CONVERSION_LABEL,
+        send_to: AW_ID + '/' + AW_LABEL_CALL,
         transport_type: 'beacon'
       });
     }
   }, true); // capture phase: run before the browser hands off to the dialer
 
-  /* Quote form submissions. The form does a native POST and Web3Forms then
-     redirects to /thanks/, so the page is torn down moments after submit —
-     same constraint as the tel:/sms: links above, and the same fix:
-     transport_type 'beacon' hands the hit to the browser to deliver
-     independently of this document. Never block submit on a callback. */
+  /* Quote form submissions. The form does a native POST to the Cloudflare
+     Worker at /api/quote, which answers 303 to /thanks/, so the page is torn
+     down moments after submit — same constraint as the tel:/sms: links above,
+     and the same fix: transport_type 'beacon' hands the hit to the browser to
+     deliver independently of this document. Never block submit on a callback.
+
+     This fires on submit, not on the /thanks/ landing, so it counts attempts
+     rather than accepted leads: a submission the Worker rejects (400 missing
+     phone, 403 outside US/HN, Turnstile failure) still counts here. Direct-POST
+     spam never loads a page, so it cannot inflate this. */
   document.addEventListener('submit', function (e) {
     var f = e.target;
     if (!f || f.tagName !== 'FORM') return;
@@ -131,9 +152,9 @@
       transport_type: 'beacon'
     });
 
-    if (AW_CONVERSION_LABEL) {
+    if (AW_LABEL_LEAD) {
       window.gtag('event', 'conversion', {
-        send_to: AW_ID + '/' + AW_CONVERSION_LABEL,
+        send_to: AW_ID + '/' + AW_LABEL_LEAD,
         transport_type: 'beacon'
       });
     }
