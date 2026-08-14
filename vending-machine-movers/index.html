@@ -309,10 +309,11 @@
                 <label for="q-details">// Details</label>
                 <textarea id="q-details" name="message" placeholder="Weight or a photo · stairs, turns, doorways, gates · ground conditions"></textarea>
             </div>
-            <!-- Spam check. The site key is public by design. If it is wrong or
-                 missing the widget simply yields no token, and the Worker still
-                 accepts the lead (flagged [UNVERIFIED]) rather than dropping it —
-                 unlike the old Web3Forms key, a bad value here costs no leads. -->
+            <!-- Spam check. The site key is public by design, but it is load-bearing:
+                 since 2026-08-05 the Worker rejects any submission without a valid
+                 token (REJECT_ON_TURNSTILE_FAIL in _worker/src/index.js). A wrong or
+                 missing key yields no token, so every lead from this page is dropped
+                 with a 400. If form leads stop arriving, check this value first. -->
             <div class="cf-turnstile" data-sitekey="0x4AAAAAAEHZC8OwWLPiJlV3"></div>
             <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
             <button type="submit" class="btn btn-primary">

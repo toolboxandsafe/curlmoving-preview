@@ -8,6 +8,10 @@
  * delegated listeners — so links and forms added later are covered
  * automatically with no code change.
  *
+ * One exception to "fires on the element": the Ads lead conversion fires on the
+ * /thanks/ landing instead of on submit, so it counts accepted leads and
+ * survives the page teardown. See the block at the bottom of this file.
+ *
  * ── ADS ACCOUNT: READ THIS BEFORE CHANGING AW_ID ─────────────────────────────
  * Until 2026-08-13 this site was tagged AW-878922638, inherited from the
  * WordPress build (see the archive, and commit 07b5cf9). That account has no
@@ -127,16 +131,17 @@
     }
   }, true); // capture phase: run before the browser hands off to the dialer
 
-  /* Quote form submissions. The form does a native POST to the Cloudflare
-     Worker at /api/quote, which answers 303 to /thanks/, so the page is torn
-     down moments after submit — same constraint as the tel:/sms: links above,
-     and the same fix: transport_type 'beacon' hands the hit to the browser to
-     deliver independently of this document. Never block submit on a callback.
+  /* Quote form submissions — GA4 only. The form does a native POST to the
+     Cloudflare Worker at /api/quote, which answers 303 to /thanks/, so the page
+     is torn down moments after submit. transport_type 'beacon' is a GA4
+     transport hint and GA4 honours it, so this event survives the teardown.
+     Never block submit on a callback.
 
-     This fires on submit, not on the /thanks/ landing, so it counts attempts
-     rather than accepted leads: a submission the Worker rejects (400 missing
-     phone, 403 outside US/HN, Turnstile failure) still counts here. Direct-POST
-     spam never loads a page, so it cannot inflate this. */
+     This counts ATTEMPTS: a submission the Worker rejects (400 missing
+     name/phone, 403 outside US/HN, 400 Turnstile) still fires it. That is
+     deliberate — the attempt rate is worth seeing on its own.
+
+     The Ads lead conversion is NOT fired here; see the /thanks/ block below. */
   document.addEventListener('submit', function (e) {
     var f = e.target;
     if (!f || f.tagName !== 'FORM') return;
@@ -151,12 +156,50 @@
       page_path: window.location.pathname,
       transport_type: 'beacon'
     });
-
-    if (AW_LABEL_LEAD) {
-      window.gtag('event', 'conversion', {
-        send_to: AW_ID + '/' + AW_LABEL_LEAD,
-        transport_type: 'beacon'
-      });
-    }
   }, true);
+
+  /* Was this page load a fresh navigation, rather than a reload or a
+     back/forward restore? Keeps a refreshed /thanks/ from booking a second
+     conversion. Unknown counts as fresh: over-counting beats dropping a real
+     lead, and Ads' "count: one" setting collapses the rare duplicate anyway. */
+  function isFreshNavigation() {
+    try {
+      var nav = performance.getEntriesByType('navigation')[0];
+      return !nav || nav.type === 'navigate';
+    } catch (err) {
+      return true;
+    }
+  }
+
+  /* Ads lead conversion. Fires on the /thanks/ landing, NOT on submit, for two
+     reasons:
+
+       1. Reliability. Unlike GA4 above, the Google Ads conversion ping does not
+          reliably honour transport_type 'beacon' — and the submitting document
+          is being torn down in the same tick by the native POST. Fired on
+          submit, Ads silently under-reports.
+
+       2. Accuracy. Only an accepted lead ever reaches /thanks/. Every Worker
+          rejection (400, 403, Turnstile) stops short of it, so a rejected
+          submission cannot book a conversion the way it could on submit.
+
+     The ?lead=1 marker is set by the Worker on the success redirect only. The
+     honeypot answers with a BARE /thanks/ — identical-looking to a bot, but no
+     marker, so a bot that renders the page and trips the honeypot books nothing.
+     That path skips Turnstile entirely (the honeypot check runs first), which is
+     why the marker rather than Turnstile is what guards this. See
+     _worker/src/index.js.
+
+     Expect GA4 generate_lead to exceed Ads conversions. That gap is the Worker's
+     rejection rate, not a tagging bug — do not "fix" it by moving this back to
+     the submit handler. */
+  if (AW_LABEL_LEAD &&
+      typeof window.gtag === 'function' &&
+      window.location.pathname.replace(/\/+$/, '') === '/thanks' &&
+      /(^|&)lead=1(&|$)/.test(window.location.search.slice(1)) &&
+      isFreshNavigation()) {
+    window.gtag('event', 'conversion', {
+      send_to: AW_ID + '/' + AW_LABEL_LEAD
+    });
+  }
 })();

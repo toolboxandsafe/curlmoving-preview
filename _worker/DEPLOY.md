@@ -62,9 +62,15 @@ You get two keys:
   public by design — it belongs in the HTML.
 - **Secret key** → step 6.
 
-If this key is wrong the widget just produces no token and the Worker still
-accepts the lead, tagged `[UNVERIFIED]`. Unlike the old Web3Forms key, a bad
-value here costs you nothing.
+**Get this key right.** It used to be harmless — the Worker soft-failed and
+accepted the lead tagged `[UNVERIFIED]`. That changed on 2026-08-05, when
+`REJECT_ON_TURNSTILE_FAIL` was set to `true` in `src/index.js` after Russian
+link-spam started POSTing straight to the endpoint. A wrong or missing site key
+yields no token, and the Worker now answers **400 and drops the lead**. So a
+typo here silently costs you 100% of the form leads from every page carrying it.
+
+If form leads ever stop arriving, check this value against the Turnstile
+dashboard before anything else.
 
 ## 4. Trello labels — DEFERRED, skip for now
 
@@ -121,28 +127,45 @@ wrangler deploy
 
 ## 7. Smoke test — before the site changes
 
+Since `REJECT_ON_TURNSTILE_FAIL` went `true` on 2026-08-05, **curl can no longer
+produce an accepted lead** — it sends no Turnstile token, so it is rejected by
+design. This step therefore proves the Worker is live and enforcing; email,
+Trello and the audit sheet get exercised through the real form in steps 9-10.
+
 ```sh
+# 1. No Turnstile token → rejected.
 curl -i -X POST https://curlmoving.com/api/quote \
   --data-urlencode 'name=Test Person' \
   --data-urlencode 'phone=6029354209' \
-  --data-urlencode 'service=gun-safe' \
-  --data-urlencode 'page=gun-safe' \
-  --data-urlencode 'message=smoke test, ignore'
+  --data-urlencode 'service=gun-safe'
+
+# 2. Missing phone → rejected earlier, before Turnstile.
+curl -i -X POST https://curlmoving.com/api/quote \
+  --data-urlencode 'name=Test Person'
+
+# 3. Honeypot → 303 to a BARE /thanks/, no ?lead=1. This is deliberate: the
+#    bot must not be able to tell it was caught, and the missing marker is
+#    what stops analytics.js booking an Ads conversion for it.
+curl -i -X POST https://curlmoving.com/api/quote \
+  --data-urlencode 'name=Test Person' \
+  --data-urlencode 'phone=6029354209' \
+  --data-urlencode 'botcheck=x'
 ```
 
-Expect all four:
+Expect:
 
-- [ ] `303` with `Location: https://curlmoving.com/thanks/`
-- [ ] email in the inbox within a minute, subject `[UNVERIFIED] Quote request — Gun Safe — Test Person`
-- [ ] Trello card at the top of New Leads, titled `Test Person — Gun Safe`
-- [ ] audit sheet row, `Source = post`
+- [ ] 1 → `400`, page text "could not be verified". **No** email, no Trello card.
+- [ ] 2 → `400`, page text "name and a phone number". Rejected before Turnstile.
+- [ ] 3 → `303` with `Location: https://curlmoving.com/thanks/` — and no query
+      string on the end.
 
-`[UNVERIFIED]` is correct here — curl sends no Turnstile token.
+A `404` or `405` instead means the route in `wrangler.toml` did not attach. A
+`403` means your IP geolocates outside `ALLOWED_COUNTRIES` (`US`, `HN`).
 
-**Check where the email landed.** If it went to spam, add a Gmail filter for
-`from:quotes@curlmoving.com` → Never send to spam. This matters more than it
-looks: `GmailApp.search` does not scan spam, so a spam-filed lead is invisible
-to the fallback path.
+**When a real lead does land in step 9, check where the email went.** If it was
+filed as spam, add a Gmail filter for `from:quotes@curlmoving.com` → Never send
+to spam. This matters more than it looks: `GmailApp.search` does not scan spam,
+so a spam-filed lead is invisible to the fallback path.
 
 ## 8. Ship the site
 
@@ -194,9 +217,12 @@ Real submission from a phone on the live site:
 
 ## Still outstanding after this
 
-- **`AW_CONVERSION_LABEL` in `analytics.js` is empty.** The form fires a
-  `generate_lead` event, but Google Ads won't attribute it until a conversion
-  action exists in the Ads account. Worth doing next.
+- **Google Ads conversions — done, but verify the labels.** Both conversion
+  actions now exist and `analytics.js` carries `AW_LABEL_CALL` and
+  `AW_LABEL_LEAD` against `AW-11500888387`. What has *not* been confirmed
+  against the dashboard is that the two are not transposed; if they are, every
+  `tel:`/`sms:` click books as a form lead and vice versa, silently. Check each
+  label against its action name in Ads → Goals → Conversions → Tag setup.
 - **Credentials in `Code.gs` are plaintext** — Trello key and token,
   RingCentral client secret, and a JWT valid until 2094, all at lines 50-97.
   Not in a git repo, so nothing is published, but they belong in

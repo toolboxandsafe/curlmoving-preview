@@ -51,8 +51,14 @@ the published output, so this source stays in git but is never fetchable at
 
 Run these before repointing the site forms at `/api/quote`.
 
+Note there is no curl happy path any more. `REJECT_ON_TURNSTILE_FAIL` went
+`true` on 2026-08-05, and curl cannot produce a Turnstile token, so every
+well-formed curl below is *supposed* to be rejected. Exercise the accepted-lead
+path through the real form in a browser.
+
 ```sh
-# happy path — expect 303 to /thanks/, an email, and a Trello card
+# well-formed but unverified — expect 400, and NO email or Trello card.
+# This is the happy path proving Turnstile enforcement, not a failure.
 curl -i -X POST https://curlmoving.com/api/quote \
   --data-urlencode 'name=Test Person' \
   --data-urlencode 'phone=6029354209' \
@@ -61,12 +67,14 @@ curl -i -X POST https://curlmoving.com/api/quote \
   --data-urlencode 'page=gun-safe' \
   --data-urlencode 'message=ignore, smoke test'
 
-# honeypot — expect 303 and absolutely nothing sent anywhere
+# honeypot — expect 303 to a BARE /thanks/ (no ?lead=1) and nothing sent
+# anywhere. The missing marker is what stops analytics.js booking an Ads
+# conversion; an accepted lead redirects to /thanks/?lead=1 instead.
 curl -i -X POST https://curlmoving.com/api/quote \
   --data-urlencode 'name=Bot' --data-urlencode 'phone=6025551234' \
   --data-urlencode 'botcheck=1'
 
-# missing phone — expect 400
+# missing phone — expect 400, rejected before Turnstile is even consulted
 curl -i -X POST https://curlmoving.com/api/quote --data-urlencode 'name=Test'
 
 # wrong method — expect 405

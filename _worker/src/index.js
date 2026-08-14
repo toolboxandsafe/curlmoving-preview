@@ -102,7 +102,15 @@ export default {
     const f = (k) => String(form.get(k) || '').trim();
 
     /* Honeypot. Bots fill hidden fields; people never see this one. Answer with
-       the same redirect a real submission gets so the bot learns nothing. */
+       a redirect to the thanks page so the bot learns nothing.
+
+       Note this runs BEFORE the Turnstile check below, so a bot that renders the
+       page and trips this reaches /thanks/ without ever being verified. That is
+       why the URL here is bare: the success path appends ?lead=1 (see
+       thanksUrl), and analytics.js books the Ads lead conversion only when that
+       marker is present. Both responses are a 303 to an identically-rendered
+       page, so the honeypot still gives nothing away. Do not add the marker
+       here. */
     if (f('botcheck')) return seeOther(env.THANKS_URL);
 
     const name = f('name');
@@ -126,7 +134,9 @@ export default {
       page: f('page') || serviceKey,
     };
 
-    /* Turnstile. Soft-fail by default — see REJECT_ON_TURNSTILE_FAIL. */
+    /* Turnstile. Hard-fail since 2026-08-05 — see REJECT_ON_TURNSTILE_FAIL.
+       No token means no lead, so a wrong site key in the page markup costs
+       every lead from that page. */
     const verified = await verifyTurnstile(env, form.get('cf-turnstile-response'), request);
     if (!verified && REJECT_ON_TURNSTILE_FAIL) {
       console.error(`turnstile rejected page=${lead.page}`);
@@ -153,7 +163,7 @@ export default {
       ctx.waitUntil(postToAppsScript(env, lead));
     }
 
-    return seeOther(env.THANKS_URL);
+    return seeOther(thanksUrl(env));
   },
 };
 
@@ -330,6 +340,20 @@ function seeOther(location) {
   // 303 so the browser re-issues as GET — a native form POST would otherwise
   // re-submit on refresh.
   return new Response(null, { status: 303, headers: { Location: location } });
+}
+
+/**
+ * Thanks URL for an ACCEPTED lead only. The ?lead=1 marker is what tells
+ * analytics.js it may book the Google Ads lead conversion — every other path to
+ * /thanks/ (the honeypot above, a bookmark, a direct visit) arrives without it
+ * and books nothing.
+ *
+ * Appended here rather than baked into THANKS_URL in wrangler.toml on purpose:
+ * the honeypot has to keep answering with the bare URL for the two responses to
+ * stay indistinguishable to a bot.
+ */
+function thanksUrl(env) {
+  return env.THANKS_URL + (env.THANKS_URL.indexOf('?') === -1 ? '?' : '&') + 'lead=1';
 }
 
 function htmlResponse(html, status) {
