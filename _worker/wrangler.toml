@@ -20,7 +20,14 @@ workers_dev = false
 # Intercepts before the request reaches GitHub Pages, so /api/quote does not
 # need to exist in the repo.
 routes = [
-  { pattern = "curlmoving.com/api/quote", zone_name = "curlmoving.com" }
+  { pattern = "curlmoving.com/api/quote", zone_name = "curlmoving.com" },
+
+  # curlvending.com's form posts here too — src/index.js already handles both sites
+  # (see SITES). The route stays commented until curlvending.com is a zone in this
+  # Cloudflare account: `wrangler deploy` fails outright on a route whose zone it
+  # cannot find, which would block a Curl Moving deploy for a Curl Vending reason.
+  # Uncomment at cutover — step 15 of Vending-Curl/CUTOVER.md.
+  # { pattern = "curlvending.com/api/quote", zone_name = "curlvending.com" },
 ]
 
 # Cloudflare Email Routing. `destination_address` must be verified in the
@@ -46,6 +53,9 @@ send_email = [
 # src/index.js still has the guarded RATE_LIMITER block; it is inert without a
 # binding and will start working if Cloudflare ships a stable one.
 
+# Per-site wording (thanks URL, sender name, item names, the subject marker) lives in
+# SITES in src/index.js, keyed by request hostname. The vars below stay the Curl Moving
+# defaults and are used for any host without an entry there.
 [vars]
 MAIL_FROM = "quotes@curlmoving.com"
 # Keep this short. Mail clients truncate the sender display name around 20

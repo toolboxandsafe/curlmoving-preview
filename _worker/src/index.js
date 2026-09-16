@@ -56,9 +56,56 @@ const ITEMS = {
   'other': 'Other Heavy Item',
 };
 
+/* Two sites post here. The mail binding, the geo gate, the honeypot, Turnstile and
+   the Apps Script hand-off are shared; only the wording and the destinations differ.
+   Keyed by request hostname; an unknown host falls back to Curl Moving, which is how
+   this Worker behaved before curlvending.com was added, so nothing changes for it.
+
+   MAIL_FROM stays quotes@curlmoving.com for BOTH sites. Email Routing is enabled on
+   the curlmoving.com zone, and the binding belongs to the Worker rather than to the
+   zone the request arrived on — which is what lets curlvending.com use it without
+   ever enabling Email Routing on its own zone, where that would replace the Google
+   Workspace MX and kill ryan@curlvending.com. */
+const SITES = {
+  'curlmoving.com': {
+    label: 'Curl Moving',
+    domain: 'curlmoving.com',
+    subjectTag: '',
+    items: ITEMS,
+    salesServices: [],
+  },
+  'curlvending.com': {
+    label: 'Curl Vending',
+    domain: 'curlvending.com',
+    /* Both sites send from the same address, so the Gmail fallback in curl-lead-intake
+       cannot tell them apart by sender. This marker in the subject is how it does.
+       Keep it in step with the curlvending_* subjectMatch regexes in Code.gs. */
+    subjectTag: ' (Curl Vending)',
+    thanksUrl: 'https://curlvending.com/submitted-quote-form/',
+    fromName: 'Curl Vending',
+    items: {
+      'vending-placement': 'Vending Machine Placement',
+      'micro-market': 'Micro Market',
+      'vending-machine': 'Vending Machine',
+      'tool-box': 'Tool Box',
+      'gun-safe': 'Gun Safe',
+      'scissor-lift': 'Scissor Lift',
+      'other': 'Other Heavy Item',
+    },
+    /* These two ask for a machine to be installed rather than for something to be
+       moved, so they carry no pickup/delivery and get their own wording downstream. */
+    salesServices: ['vending-placement', 'micro-market'],
+  },
+};
+
+function siteFor(hostname) {
+  return SITES[String(hostname || '').replace(/^www\./, '')] || SITES['curlmoving.com'];
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const site = siteFor(url.hostname);
 
     if (url.pathname !== '/api/quote') return new Response('Not found', { status: 404 });
     if (request.method !== 'POST') {
@@ -89,7 +136,7 @@ export default {
     const country = request.cf && request.cf.country;
     if (country && ALLOWED_COUNTRIES.indexOf(country) === -1) {
       console.error(`blocked country=${country}`);
-      return htmlResponse(outsideAreaPage(env), 403);
+      return htmlResponse(outsideAreaPage(env, site), 403);
     }
 
     let form;
@@ -111,19 +158,19 @@ export default {
        marker is present. Both responses are a 303 to an identically-rendered
        page, so the honeypot still gives nothing away. Do not add the marker
        here. */
-    if (f('botcheck')) return seeOther(env.THANKS_URL);
+    if (f('botcheck')) return seeOther(site.thanksUrl || env.THANKS_URL);
 
     const name = f('name');
     const phone = f('phone');
     if (!name || !phone) {
-      return htmlResponse(problemPage(env, 'Please include your name and a phone number so I can reach you.'), 400);
+      return htmlResponse(problemPage(env, site, 'Please include your name and a phone number so I can reach you.'), 400);
     }
 
     const serviceKey = f('service') || 'other';
     const lead = {
       lead_id: crypto.randomUUID(),
       item_key: serviceKey,
-      item: ITEMS[serviceKey] || ITEMS.other,
+      item: site.items[serviceKey] || site.items.other,
       name,
       phone,
       email: f('email'),
@@ -132,6 +179,23 @@ export default {
       requested_date: f('when'),
       message: f('message'),
       page: f('page') || serviceKey,
+      /* Which site this came from. Both post through this Worker with the same service
+         values, so without it curl-lead-intake files a Curl Vending lead as a Curl
+         Moving one — right item, wrong business, wrong text to the customer. */
+      site: site.domain,
+      /* Curl Vending's forms carry a few fields Curl Moving's do not. Anything the
+         builder could not map keeps an x_ prefix and is passed through under "Other
+         Details", so a form change can never silently drop an answer. */
+      business: f('business'),
+      pickup_business: f('pickup_business'),
+      delivery_business: f('dropoff_business'),
+      count: f('count'),
+      contact_method: f('contact_method'),
+      extras: [...form.entries()]
+        .filter(([k, v]) => k.startsWith('x_') && String(v).trim())
+        .map(([k, v]) => `${k.slice(2).replace(/_/g, ' ')}: ${String(v).trim()}`)
+        .join('; '),
+      sales: site.salesServices.indexOf(serviceKey) !== -1,
     };
 
     /* Turnstile. Hard-fail since 2026-08-05 — see REJECT_ON_TURNSTILE_FAIL.
@@ -140,7 +204,7 @@ export default {
     const verified = await verifyTurnstile(env, form.get('cf-turnstile-response'), request);
     if (!verified && REJECT_ON_TURNSTILE_FAIL) {
       console.error(`turnstile rejected page=${lead.page}`);
-      return htmlResponse(problemPage(env,
+      return htmlResponse(problemPage(env, site,
         'That submission could not be verified. If you have JavaScript disabled, please text or call instead — it is faster anyway.'), 400);
     }
     lead.verified = verified;
@@ -148,12 +212,12 @@ export default {
     /* Email first, and awaited: it is both the record and the fallback, so it
        is the one delivery that must not be fire-and-forget. */
     try {
-      await sendLeadEmail(env, lead);
+      await sendLeadEmail(env, lead, site);
     } catch (err) {
       console.error(`send_email failed page=${lead.page} reason=${String(err && err.message || err).slice(0, 200)}`);
       // Nothing has reached Ryan. Give the customer their text back rather than
       // a blank 500, so the effort isn't lost.
-      return htmlResponse(lostPage(env, lead), 200);
+      return htmlResponse(lostPage(env, site, lead), 200);
     }
 
     /* Apps Script drives the automation. Deliberately not awaited before the
@@ -163,7 +227,7 @@ export default {
       ctx.waitUntil(postToAppsScript(env, lead));
     }
 
-    return seeOther(thanksUrl(env));
+    return seeOther(thanksUrl(env, site));
   },
 };
 
@@ -229,39 +293,77 @@ async function postToAppsScript(env, lead) {
  *     occurrence of each label string.
  *   - the footer starts with "Sent from", which the parser already strips.
  */
-function buildEmailBody(lead) {
-  const rows = [
-    ['Lead ID', lead.lead_id],
-    ['Item', lead.item],
-    ['Name', lead.name],
-    ['Phone', lead.phone],
-    ['Email', lead.email],
-    ['Pickup Address', lead.pickup_address],
-    ['Delivery Address', lead.delivery_address],
-    ['Requested Date', lead.requested_date],
-    ['Message', lead.message],
-  ];
+function buildEmailBody(lead, site) {
+  /* Every label emitted here must be declared in the matching FORMS entry in
+     curl-lead-intake, as `fields`, `address_business_prefix` or `extras`. The parser
+     takes each value as the text up to the NEXT label it knows, so an undeclared label
+     is not ignored — it is swallowed into the previous field's value. */
+  let rows;
+  if (site.domain !== 'curlvending.com') {
+    rows = [
+      ['Lead ID', lead.lead_id],
+      ['Item', lead.item],
+      ['Name', lead.name],
+      ['Phone', lead.phone],
+      ['Email', lead.email],
+      ['Pickup Address', lead.pickup_address],
+      ['Delivery Address', lead.delivery_address],
+      ['Requested Date', lead.requested_date],
+      ['Message', lead.message],
+    ];
+  } else if (lead.sales) {
+    // Asking for a machine or a micro market: no pickup, no delivery, no date.
+    rows = [
+      ['Lead ID', lead.lead_id],
+      ['Item', lead.item],
+      ['Name', lead.name],
+      ['Phone', lead.phone],
+      ['Email', lead.email],
+      ['Business', lead.business],
+      ['Contact Method', lead.contact_method],
+      ['Message', lead.message],
+      ['Other Details', lead.extras],
+    ];
+  } else {
+    rows = [
+      ['Lead ID', lead.lead_id],
+      ['Item', lead.item],
+      ['Name', lead.name],
+      ['Phone', lead.phone],
+      ['Email', lead.email],
+      ['Pick Up Business', lead.pickup_business],
+      ['Pickup Address', lead.pickup_address],
+      ['Drop Off Business', lead.delivery_business],
+      ['Delivery Address', lead.delivery_address],
+      ['Number Of Items', lead.count],
+      ['Requested Date', lead.requested_date],
+      ['Contact Method', lead.contact_method],
+      ['Message', lead.message],
+      ['Other Details', lead.extras],
+    ];
+  }
+
   const out = [];
   for (const [label, value] of rows) {
     out.push(label);
     out.push(value || '(not given)');
   }
   out.push('');
-  out.push(`Sent from curlmoving.com — ${lead.page}${lead.verified ? '' : ' — Turnstile unverified'}`);
+  out.push(`Sent from ${site.domain} — ${lead.page}${lead.verified ? '' : ' — Turnstile unverified'}`);
   return out.join('\n');
 }
 
-async function sendLeadEmail(env, lead) {
+async function sendLeadEmail(env, lead, site) {
   const from = env.MAIL_FROM;
   const to = env.MAIL_TO;
 
   // Bound the name's contribution so a pathological value can't produce an
   // absurd Subject header.
   const shortName = lead.name.length > 40 ? lead.name.slice(0, 40) + '…' : lead.name;
-  const subject = `${lead.verified ? '' : '[UNVERIFIED] '}Quote request — ${lead.item} — ${shortName}`;
+  const subject = `${lead.verified ? '' : '[UNVERIFIED] '}Quote request${site.subjectTag} — ${lead.item} — ${shortName}`;
 
   const headers = [
-    `From: ${encodeHeaderWord(env.MAIL_FROM_NAME)} <${from}>`,
+    `From: ${encodeHeaderWord(site.fromName || env.MAIL_FROM_NAME)} <${from}>`,
     `To: <${to}>`,
   ];
 
@@ -272,7 +374,7 @@ async function sendLeadEmail(env, lead) {
   }
 
   headers.push(
-    `Message-ID: <${lead.lead_id}@curlmoving.com>`,
+    `Message-ID: <${lead.lead_id}@${site.domain}>`,
     `Date: ${new Date().toUTCString()}`,
     `Subject: ${encodeHeaderWord(subject)}`,
     'MIME-Version: 1.0',
@@ -280,7 +382,7 @@ async function sendLeadEmail(env, lead) {
     'Content-Transfer-Encoding: base64',
   );
 
-  const raw = headers.join('\r\n') + '\r\n\r\n' + wrap76(b64(utf8(buildEmailBody(lead)))) + '\r\n';
+  const raw = headers.join('\r\n') + '\r\n\r\n' + wrap76(b64(utf8(buildEmailBody(lead, site)))) + '\r\n';
 
   await env.SEND_EMAIL.send(new EmailMessage(from, to, raw));
 }
@@ -352,8 +454,9 @@ function seeOther(location) {
  * the honeypot has to keep answering with the bare URL for the two responses to
  * stay indistinguishable to a bot.
  */
-function thanksUrl(env) {
-  return env.THANKS_URL + (env.THANKS_URL.indexOf('?') === -1 ? '?' : '&') + 'lead=1';
+function thanksUrl(env, site) {
+  const base = (site && site.thanksUrl) || env.THANKS_URL;
+  return base + (base.indexOf('?') === -1 ? '?' : '&') + 'lead=1';
 }
 
 function htmlResponse(html, status) {
@@ -369,10 +472,10 @@ function esc(s) {
   ));
 }
 
-function shell(title, inner) {
+function shell(title, inner, site) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(title)} — Curl Moving</title>
+<title>${esc(title)} — ${esc((site && site.label) || 'Curl Moving')}</title>
 <style>
   body{margin:0;padding:48px 24px;background:#f2ece2;color:#1c1a17;
        font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
@@ -389,24 +492,24 @@ function shell(title, inner) {
 /* Shown when the submission comes from outside the served countries. Kept
    polite and with the phone number visible, because the rare false positive is
    a real person on a VPN or travelling. */
-function outsideAreaPage(env) {
+function outsideAreaPage(env, site) {
   return shell('Outside our service area', `
-    <h1>We only move in Arizona</h1>
+    <h1>We only serve Arizona</h1>
     <p>This form is limited to the Phoenix metro area. If you are genuinely
-       trying to book a move here and reached this page by mistake — a VPN will
+       trying to reach us here and landed on this page by mistake — a VPN will
        do it — call or text and I will sort it out directly.</p>
     <a class="btn" href="sms:${esc(env.CONTACT_PHONE_E164)}">Text ${esc(env.CONTACT_PHONE)}</a>
-    <a class="btn" href="tel:${esc(env.CONTACT_PHONE_E164)}">Call</a>`);
+    <a class="btn" href="tel:${esc(env.CONTACT_PHONE_E164)}">Call</a>`, site);
 }
 
-function problemPage(env, msg) {
+function problemPage(env, site, msg) {
   return shell('Check the form', `
     <h1>One thing missing</h1>
     <p>${esc(msg)}</p>
     <p>Or skip the form entirely — texting is faster anyway.</p>
     <a class="btn" href="sms:${esc(env.CONTACT_PHONE_E164)}">Text ${esc(env.CONTACT_PHONE)}</a>
     <a class="btn" href="tel:${esc(env.CONTACT_PHONE_E164)}">Call</a>
-    <p><a class="plain" href="javascript:history.back()">← Back to the form</a></p>`);
+    <p><a class="plain" href="javascript:history.back()">← Back to the form</a></p>`, site);
 }
 
 /**
@@ -414,12 +517,13 @@ function problemPage(env, msg) {
  * Hands the customer their own text back with a prefilled mailto so the effort
  * isn't lost — the exact failure mode (silent loss) this rewrite exists to fix.
  */
-function lostPage(env, lead) {
+function lostPage(env, site, lead) {
   const summary = [
     `Item: ${lead.item}`,
     `Name: ${lead.name}`,
     `Phone: ${lead.phone}`,
     lead.email ? `Email: ${lead.email}` : '',
+    lead.business ? `Business: ${lead.business}` : '',
     lead.pickup_address ? `Pickup: ${lead.pickup_address}` : '',
     lead.delivery_address ? `Delivery: ${lead.delivery_address}` : '',
     lead.requested_date ? `When: ${lead.requested_date}` : '',
@@ -436,5 +540,5 @@ function lostPage(env, lead) {
     <a class="btn" href="tel:${esc(env.CONTACT_PHONE_E164)}">Call</a>
     <p style="margin-top:24px">Or <a class="plain" href="${esc(mailto)}">email it instead</a> —
        here is what you typed, so nothing is lost:</p>
-    <pre>${esc(summary)}</pre>`);
+    <pre>${esc(summary)}</pre>`, site);
 }
