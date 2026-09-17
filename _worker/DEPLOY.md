@@ -217,12 +217,13 @@ Real submission from a phone on the live site:
 
 ## Still outstanding after this
 
-- **Google Ads conversions — done, but verify the labels.** Both conversion
-  actions now exist and `analytics.js` carries `AW_LABEL_CALL` and
-  `AW_LABEL_LEAD` against `AW-11500888387`. What has *not* been confirmed
-  against the dashboard is that the two are not transposed; if they are, every
-  `tel:`/`sms:` click books as a form lead and vice versa, silently. Check each
-  label against its action name in Ads → Goals → Conversions → Tag setup.
+- **Google Ads conversions — done, and the labels verified 2026-09-17.** Ryan
+  pasted both event snippets from Ads (account 496-685-0286, tag
+  `AW-11500888387`): "Curl Moving — Call/Text Click" is `woZzCOGwpuEcEMPChuwq`
+  and "Curl Moving — Quote Form" is `5bwNCN6wpuEcEMPChuwq`, matching
+  `AW_LABEL_CALL` and `AW_LABEL_LEAD` in `analytics.js` — not transposed. The
+  same account now also holds Curl Vending's two actions; see the Vending-Curl
+  project.
 - **Credentials in `Code.gs` are plaintext** — Trello key and token,
   RingCentral client secret, and a JWT valid until 2094, all at lines 50-97.
   Not in a git repo, so nothing is published, but they belong in
