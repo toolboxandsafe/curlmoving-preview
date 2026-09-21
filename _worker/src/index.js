@@ -263,6 +263,12 @@ async function verifyTurnstile(env, site, token, request) {
       body,
     });
     const data = await res.json();
+    /* Log why, not just that. Cloudflare returns `invalid-input-secret` for a wrong or
+       missing secret and `invalid-input-response` for a bad token — very different
+       problems that otherwise look identical, because both end as a lost lead. */
+    if (data.success !== true) {
+      console.error(`turnstile failed ${(site && site.domain) || '?'}: ${(data['error-codes'] || []).join(',') || 'no error code'}`);
+    }
     return data.success === true;
   } catch (err) {
     console.error('turnstile verify error: ' + String(err && err.message || err).slice(0, 200));
