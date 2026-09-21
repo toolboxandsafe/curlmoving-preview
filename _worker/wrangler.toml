@@ -23,11 +23,12 @@ routes = [
   { pattern = "curlmoving.com/api/quote", zone_name = "curlmoving.com" },
 
   # curlvending.com's form posts here too — src/index.js already handles both sites
-  # (see SITES). The route stays commented until curlvending.com is a zone in this
-  # Cloudflare account: `wrangler deploy` fails outright on a route whose zone it
-  # cannot find, which would block a Curl Moving deploy for a Curl Vending reason.
-  # Uncomment at cutover — step 15 of Vending-Curl/CUTOVER.md.
-  # { pattern = "curlvending.com/api/quote", zone_name = "curlvending.com" },
+  # (see SITES). Uncommented at cutover 2026-09-20: curlvending.com is now a zone in
+  # this Cloudflare account (nameservers aaron/lilyana.ns.cloudflare.com), so wrangler
+  # can resolve the route. It was commented until then because `wrangler deploy` fails
+  # outright on a route whose zone it cannot find, which would have blocked a Curl
+  # Moving deploy for a Curl Vending reason.
+  { pattern = "curlvending.com/api/quote", zone_name = "curlvending.com" },
 ]
 
 # Cloudflare Email Routing. `destination_address` must be verified in the
