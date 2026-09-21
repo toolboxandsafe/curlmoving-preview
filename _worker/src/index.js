@@ -71,6 +71,11 @@ const SITES = {
     label: 'Curl Moving',
     domain: 'curlmoving.com',
     subjectTag: '',
+    /* Each site has its OWN Turnstile widget, so each needs its own secret. Sharing one
+       would make every submission on the other site fail verification, and Turnstile is
+       hard-fail, so those leads would vanish with no error anywhere.
+       curlmoving site key 0x4AAAAAAEHZC8OwWLPiJlV3, curlvending 0x4AAAAAAE3wlgvfplSXBN23. */
+    turnstileSecret: 'TURNSTILE_SECRET',
     items: ITEMS,
     salesServices: [],
   },
@@ -81,6 +86,7 @@ const SITES = {
        cannot tell them apart by sender. This marker in the subject is how it does.
        Keep it in step with the curlvending_* subjectMatch regexes in Code.gs. */
     subjectTag: ' (Curl Vending)',
+    turnstileSecret: 'TURNSTILE_SECRET_VENDING',
     thanksUrl: 'https://curlvending.com/submitted-quote-form/',
     fromName: 'Curl Vending',
     items: {
@@ -201,7 +207,7 @@ export default {
     /* Turnstile. Hard-fail since 2026-08-05 — see REJECT_ON_TURNSTILE_FAIL.
        No token means no lead, so a wrong site key in the page markup costs
        every lead from that page. */
-    const verified = await verifyTurnstile(env, form.get('cf-turnstile-response'), request);
+    const verified = await verifyTurnstile(env, site, form.get('cf-turnstile-response'), request);
     if (!verified && REJECT_ON_TURNSTILE_FAIL) {
       console.error(`turnstile rejected page=${lead.page}`);
       return htmlResponse(problemPage(env, site,
@@ -235,11 +241,19 @@ export default {
    Turnstile
    ───────────────────────────────────────────────────────────────────────── */
 
-async function verifyTurnstile(env, token, request) {
-  if (!env.TURNSTILE_SECRET || !token) return false;
+async function verifyTurnstile(env, site, token, request) {
+  /* Deliberately no fallback to TURNSTILE_SECRET: verifying against the wrong widget's
+     secret always fails, and a hard-fail costs the lead. An unset secret fails the same
+     way, but `turnstile secret missing` in the log says which. */
+  const secret = env[(site && site.turnstileSecret) || 'TURNSTILE_SECRET'];
+  if (!secret) {
+    console.error(`turnstile secret missing: ${(site && site.turnstileSecret) || 'TURNSTILE_SECRET'}`);
+    return false;
+  }
+  if (!token) return false;
   try {
     const body = new FormData();
-    body.append('secret', env.TURNSTILE_SECRET);
+    body.append('secret', secret);
     body.append('response', String(token));
     const ip = request.headers.get('CF-Connecting-IP');
     if (ip) body.append('remoteip', ip);
