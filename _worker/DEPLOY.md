@@ -119,11 +119,25 @@ Both print `TEST FAIL` lines if anything is wrong. Silence is success.
 
 ```sh
 cd _worker
-wrangler secret put TURNSTILE_SECRET     # from step 3
+wrangler secret put TURNSTILE_SECRET     # from step 3 — CURLMOVING's widget
 wrangler secret put APPS_SCRIPT_URL      # the /exec URL from step 5
 wrangler secret put APPS_SCRIPT_TOKEN    # same string as CONFIG.SCRIPT_TOKEN
 wrangler deploy
 ```
+
+> **Two sites share this Worker since 2026-09-20.** curlvending.com's forms post
+> here too, and it has its **own** Turnstile widget, so its secret is separate:
+>
+> ```sh
+> wrangler secret put TURNSTILE_SECRET_VENDING   # curlvending's widget only
+> ```
+>
+> `TURNSTILE_SECRET` above stays curlmoving's. Overwriting it with a Curl Vending
+> key makes **every Curl Moving submission fail** — silently, because Turnstile
+> hard-fails and creates no lead. See **Two sites, one Worker** in `README.md`.
+>
+> `wrangler deploy` ships both routes, and `APPS_SCRIPT_URL` / `APPS_SCRIPT_TOKEN`
+> are shared, pointing at the one Apps Script that serves both businesses.
 
 ## 7. Smoke test — before the site changes
 
