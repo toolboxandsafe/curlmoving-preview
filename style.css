@@ -542,3 +542,10 @@ footer { background: var(--c-coal); color: var(--c-bone); padding: 64px 0 32px; 
     .header-email { font-size: 7px; letter-spacing: 0.01em; }
     .menu-btn { padding: 5px 7px; font-size: 11.5px; }
 }
+
+/* PROMO CODE — the coupon-card landing page (/box/). Dashed like the border
+   printed on the card, so the page reads as the same coupon. */
+.promo-code { display: inline-flex; align-items: center; gap: 16px; flex-wrap: wrap; border: 3px dashed var(--c-bone); padding: 12px 20px; margin-bottom: 26px; }
+.promo-code-label { font-family: var(--f-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-amber); }
+.promo-code-value { font-family: var(--f-display); font-weight: 700; font-size: clamp(28px, 7vw, 44px); line-height: 1; letter-spacing: 0.07em; color: var(--c-bone); }
+.promo-terms { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-bone); opacity: 0.75; margin-top: 22px; }
